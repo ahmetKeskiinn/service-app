@@ -31,9 +31,11 @@ class MainServiceFragment : Fragment() {
         initialVM()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         mainServiceViewModel = ViewModelProvider(this, viewModelFactory).get(MainServiceViewModel::class.java)
     }

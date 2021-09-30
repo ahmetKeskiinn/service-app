@@ -30,9 +30,11 @@ class SelectSafetyLocationFragment : Fragment() {
         initialVM()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         selectedSafetyViewModel = ViewModelProvider(this, viewModelFactory).get(SelectedSafetyLocationViewModel::class.java)
     }

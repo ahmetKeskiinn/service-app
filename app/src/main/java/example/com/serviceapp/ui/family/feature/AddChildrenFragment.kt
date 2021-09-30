@@ -35,15 +35,19 @@ class AddChildrenFragment : Fragment() {
         initalButton()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         addChildrenFragment = ViewModelProvider(this, viewModelFactory).get(AddChildrenViewModel::class.java)
     }
+
     private fun addInfos() {
         // if(binding)
     }
+
     private fun initalButton() {
         binding.addButton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)

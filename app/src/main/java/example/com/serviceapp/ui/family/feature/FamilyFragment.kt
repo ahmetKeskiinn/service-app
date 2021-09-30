@@ -26,6 +26,7 @@ class FamilyFragment : Fragment() {
         binding = FragmentFamilyBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialUI()
         initialVM()
@@ -37,9 +38,11 @@ class FamilyFragment : Fragment() {
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         familyViewModel = ViewModelProvider(this, viewModelFactory).get(FamilyViewModel::class.java)
     }
+
     private fun initialTextViews() {
         binding.addChildrenButton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_addChildrenFragment)
@@ -48,6 +51,7 @@ class FamilyFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
         }
     }
+
     private fun initialRecyclerView() {
         binding.childrenRecycler
     }

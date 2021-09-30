@@ -30,9 +30,11 @@ class MainAdminFragment : Fragment() {
         initialVM()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         mainAdminViewModel = ViewModelProvider(this, viewModelFactory).get(MainAdminViewModel::class.java)
     }

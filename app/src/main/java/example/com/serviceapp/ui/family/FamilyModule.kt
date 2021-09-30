@@ -15,10 +15,12 @@ abstract class FamilyModule {
     @IntoMap
     @ViewModelKey(AddChildrenViewModel::class)
     internal abstract fun bindAddChildrenViewModel(viewModel: AddChildrenViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(FamilyViewModel::class)
     internal abstract fun bindFamilyViewModel(viewModel: FamilyViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(SelectedSafetyLocationViewModel::class)

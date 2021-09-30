@@ -2,6 +2,7 @@ package example.com.mapproject.di
 
 import dagger.Component
 import example.com.serviceapp.di.FactoryModule
+import example.com.serviceapp.di.FireBaseModule
 import example.com.serviceapp.di.NetworkModule
 import example.com.serviceapp.di.RoomModule
 import example.com.serviceapp.di.SharedPrefModule
@@ -16,7 +17,6 @@ import example.com.serviceapp.ui.service.feature.ChatServiceFragment
 import example.com.serviceapp.ui.service.feature.MainServiceFragment
 import example.com.serviceapp.ui.teacher.TeacherModule
 import example.com.serviceapp.ui.teacher.feature.MainAdminFragment
-
 import javax.inject.Singleton
 
 @Singleton
@@ -29,7 +29,8 @@ import javax.inject.Singleton
         LoginViewModelModule::class,
         FamilyModule::class,
         ServiceModule::class,
-        TeacherModule::class
+        TeacherModule::class,
+        FireBaseModule::class
     ]
 )
 interface AppComponent {

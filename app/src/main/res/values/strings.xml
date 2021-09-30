@@ -18,4 +18,5 @@
     <string name="add">Add</string>
     <string name="service">He/She will use service</string>
     <string name="chatButton">Chat</string>
+    <string name="invalidateAuthetication">Authentication Error! Please Check Your E-Mail and Password!</string>
 </resources>

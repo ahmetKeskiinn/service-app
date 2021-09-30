@@ -1,11 +1,9 @@
 package example.com.serviceapp.di
 
 import android.app.Application
-import androidx.databinding.library.BuildConfig
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
-import example.com.serviceapp.BuildConfig.BASE_URL
 import example.com.serviceapp.utils.GetService
 import okhttp3.Cache
 import okhttp3.OkHttpClient

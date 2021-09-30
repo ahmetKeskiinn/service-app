@@ -9,7 +9,6 @@ import example.com.mapproject.utils.ViewModelKey
 import example.com.serviceapp.ui.login.LoginSource
 import example.com.serviceapp.ui.login.LoginViewModel
 import example.com.serviceapp.utils.GetService
-
 import javax.inject.Singleton
 
 @Module
@@ -20,6 +19,7 @@ class LoginModule {
         api: GetService
     ): LoginSource = LoginSource(api)
 }
+
 @Module
 abstract class LoginViewModelModule {
     @Binds

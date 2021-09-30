@@ -31,9 +31,11 @@ class ChatServiceFragment : Fragment() {
         initialVM()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }
+
     private fun initialVM() {
         chatServiceViewModel = ViewModelProvider(this, viewModelFactory).get(ChatServiceViewModel::class.java)
     }
