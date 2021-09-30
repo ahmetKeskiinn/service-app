@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="example.com.serviceapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainAdminFragment"
+            app:destination="@id/mainAdminFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainServiceFragment"
+            app:destination="@id/mainServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="example.com.serviceapp.ui.family.feature.FamilyFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_family" >
+        <action
+            android:id="@+id/action_mapFragment_to_addChildrenFragment"
+            app:destination="@id/addChildrenFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_selectSafetyLocationFragment"
+            app:destination="@id/selectSafetyLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addChildrenFragment"
+        android:name="example.com.serviceapp.ui.family.feature.AddChildrenFragment"
+        android:label="fragment_add_children"
+        tools:layout="@layout/fragment_add_children" >
+        <action
+            android:id="@+id/action_addChildrenFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectSafetyLocationFragment"
+        android:name="example.com.serviceapp.ui.family.feature.SelectSafetyLocationFragment"
+        android:label="fragment_select_safety_location"
+        tools:layout="@layout/fragment_select_safety_location" >
+        <action
+            android:id="@+id/action_selectSafetyLocationFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainAdminFragment"
+        android:name="example.com.serviceapp.ui.teacher.feature.MainAdminFragment"
+        android:label="fragment_main_admin"
+        tools:layout="@layout/fragment_main_admin" />
+    <fragment
+        android:id="@+id/mainServiceFragment"
+        android:name="example.com.serviceapp.ui.service.feature.MainServiceFragment"
+        android:label="fragment_main_service"
+        tools:layout="@layout/fragment_main_service" >
+        <action
+            android:id="@+id/action_mainServiceFragment_to_chatServiceFragment"
+            app:destination="@id/chatServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatServiceFragment"
+        android:name="example.com.serviceapp.ui.service.feature.ChatServiceFragment"
+        android:label="fragment_chat_service"
+        tools:layout="@layout/fragment_chat_service" >
+        <action
+            android:id="@+id/action_chatServiceFragment_to_mainServiceFragment"
+            app:destination="@id/mainServiceFragment" />
+    </fragment>
+</navigation>

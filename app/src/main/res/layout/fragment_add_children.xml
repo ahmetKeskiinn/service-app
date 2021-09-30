@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.family.feature.AddChildrenFragment">
+
+    <ImageView
+        android:id="@+id/childPhoto"
+        android:layout_marginTop="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/childrenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:inputType="textPersonName"
+        android:hint="@string/childrenName"
+        app:layout_constraintEnd_toEndOf="@+id/childPhoto"
+        app:layout_constraintStart_toStartOf="@+id/childPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/childPhoto" />
+
+    <EditText
+        android:id="@+id/childrenNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/schoolNumber"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/childrenName"
+        app:layout_constraintStart_toStartOf="@+id/childrenName"
+        app:layout_constraintTop_toBottomOf="@+id/childrenName" />
+    <CheckBox
+        android:id="@+id/serviceCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/service"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/childrenNumber"
+        app:layout_constraintStart_toStartOf="@+id/childrenNumber"
+        app:layout_constraintTop_toBottomOf="@+id/childrenNumber" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/serviceCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/serviceCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/serviceCheckBox" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
