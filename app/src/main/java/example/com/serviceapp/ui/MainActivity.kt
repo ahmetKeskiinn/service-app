@@ -14,14 +14,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-      /*  db = FirebaseDatabase.getInstance().getReference("users")
-        val model = User("ahmet","keskin")
-
-        db.child("ahmet").setValue(model).addOnSuccessListener {
-            Log.d("TAG", "onCreate:xx ")
-        }
-        db.child("ahmet").get(model).addOnSuccessListener {
-            Log.d("TAG", "onCreate:xx ")
-        }*/
     }
 }

@@ -53,6 +53,7 @@ class FamilyFragment : Fragment() {
     }
 
     private fun initialRecyclerView() {
+        familyViewModel.childList()
         binding.childrenRecycler
     }
 }

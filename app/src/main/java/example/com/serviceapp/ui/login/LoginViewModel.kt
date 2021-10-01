@@ -1,5 +1,6 @@
 package example.com.serviceapp.ui.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import example.com.serviceapp.utils.Authentication
@@ -15,5 +16,7 @@ class LoginViewModel @Inject constructor(val auth: FirebaseAuth) : ViewModel() {
                     listener.isSuccess(task.isSuccessful)
                 }
         }
+        Log.d("TAG", "childList: " + auth.currentUser?.email)
+        Log.d("TAG", "childList: " + auth.currentUser?.displayName)
     }
 }
