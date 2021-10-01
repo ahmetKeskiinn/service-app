@@ -8,17 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.tabs.TabLayout
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentLoginBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.utils.Authentication
-import example.com.serviceapp.utils.AuthenticationSplash
-import example.com.serviceapp.utils.AuthenticationStatus
+import example.com.serviceapp.utils.AuthenticationUtils.Authentication
+import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationStatus
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
-class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
+class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var loginViewModel: LoginViewModel
@@ -35,7 +33,6 @@ class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialUI()
         initialVM()
-        initialTablayout()
         initialButton()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -48,10 +45,6 @@ class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
         loginViewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
     }
 
-    private fun initialTablayout() {
-
-    }
-
     private fun initialButton() {
         binding.sign.setOnClickListener {
             if (binding.rememberMe.isChecked) {
@@ -62,7 +55,7 @@ class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
     }
 
     override fun isSuccess(boolean: Boolean) {
-        if(boolean){
+        if (boolean) {
             loginViewModel.getStatus(this)
         } else {
             Toast.makeText(context, R.string.invalidateAuthetication, Toast.LENGTH_SHORT).show()
@@ -70,17 +63,14 @@ class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
     }
 
     override fun getStatus(data: String) {
-        if(data.equals("family")){
+        if (data.equals("family")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mapFragment)
-        } else if(data.equals("service")){
+        } else if (data.equals("service")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainServiceFragment)
-
-        } else if(data.equals("admin")){
+        } else if (data.equals("admin")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainAdminFragment)
-        }
-        else{
+        } else {
             Toast.makeText(context, R.string.somethingWentsWrong, Toast.LENGTH_SHORT).show()
         }
     }
-
 }

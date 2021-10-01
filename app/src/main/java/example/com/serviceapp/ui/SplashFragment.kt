@@ -2,7 +2,6 @@ package example.com.serviceapp.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,9 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.utils.Authentication
-import example.com.serviceapp.utils.AuthenticationSplash
-import example.com.serviceapp.utils.AuthenticationStatus
+import example.com.serviceapp.utils.AuthenticationUtils.Authentication
+import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationSplash
+import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationStatus
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
@@ -68,16 +67,14 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
     }
 
     override fun getStatus(data: String) {
-        if(data.equals("family")){
+        if (data.equals("family")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mapFragment)
-        } else if(data.equals("service")){
+        } else if (data.equals("service")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainServiceFragment)
-        }
-        else if(data.equals("admin")){
+        } else if (data.equals("admin")) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainAdminFragment)
-        } else{
+        } else {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
         }
-
     }
 }

@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import example.com.serviceapp.utils.Authentication
-import example.com.serviceapp.utils.AuthenticationSplash
-import example.com.serviceapp.utils.AuthenticationStatus
+import example.com.serviceapp.utils.AuthenticationUtils.Authentication
+import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationSplash
+import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationStatus
 import javax.inject.Inject
 
 class SplashScreenViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
@@ -31,15 +31,15 @@ class SplashScreenViewModel @Inject constructor(val auth: FirebaseAuth, val fire
                 }
         }
     }
-    fun getStatus(listener: AuthenticationStatus){
+    fun getStatus(listener: AuthenticationStatus) {
         Log.d("TAG", "getStatus: " + sharedPreferences.getString("id", ""))
         val db = firebaseDB.getReference("users")
         db.get().addOnSuccessListener {
             for (child in it.getChildren()) {
-            if (child.child("userName").getValue().toString().equals(sharedPreferences.getString("id", ""))){
-                Log.d("TAG", "getStatus: ")
-                listener.getStatus(child.child("status").getValue().toString())
-            }
+                if (child.child("userName").getValue().toString().equals(sharedPreferences.getString("id", ""))) {
+                    Log.d("TAG", "getStatus: ")
+                    listener.getStatus(child.child("status").getValue().toString())
+                }
             }
         }.addOnFailureListener {
         }
