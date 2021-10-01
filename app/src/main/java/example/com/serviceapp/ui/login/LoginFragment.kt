@@ -35,7 +35,6 @@ class LoginFragment : Fragment(), Authentication {
         initialVM()
         initialTablayout()
         initialButton()
-        initialCheckBox()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -68,13 +67,10 @@ class LoginFragment : Fragment(), Authentication {
 
     private fun initialButton() {
         binding.sign.setOnClickListener {
+            if(binding.rememberMe.isChecked){
+                loginViewModel.saveInfos(binding.id.text.toString(),binding.pw.text.toString())
+            }
             loginViewModel.firebaseAuth(this, binding.id.text.toString(), binding.pw.text.toString())
-        }
-    }
-
-    private fun initialCheckBox() {
-        if (binding.rememberMe.isChecked) {
-        } else {
         }
     }
 

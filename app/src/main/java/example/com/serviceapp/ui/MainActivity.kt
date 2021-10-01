@@ -9,7 +9,6 @@ import example.com.serviceapp.R
 import example.com.serviceapp.ui.login.User
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var db: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

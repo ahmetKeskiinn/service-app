@@ -3,22 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="example.com.serviceapp.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_mainAdminFragment"
-            app:destination="@id/mainAdminFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_mainServiceFragment"
-            app:destination="@id/mainServiceFragment" />
-    </fragment>
+    app:startDestination="@id/splashFragment2">
     <fragment
         android:id="@+id/mapFragment"
         android:name="example.com.serviceapp.ui.family.feature.main.FamilyFragment"
@@ -70,6 +55,39 @@
         tools:layout="@layout/fragment_chat_service" >
         <action
             android:id="@+id/action_chatServiceFragment_to_mainServiceFragment"
+            app:destination="@id/mainServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment2"
+        android:name="example.com.serviceapp.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment2_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_splashFragment2_to_mainAdminFragment"
+            app:destination="@id/mainAdminFragment" />
+        <action
+            android:id="@+id/action_splashFragment2_to_mainServiceFragment"
+            app:destination="@id/mainServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="example.com.serviceapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainAdminFragment"
+            app:destination="@id/mainAdminFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainServiceFragment"
             app:destination="@id/mainServiceFragment" />
     </fragment>
 </navigation>

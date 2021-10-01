@@ -1,5 +1,8 @@
 package example.com.serviceapp.di
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -26,10 +29,4 @@ class FireBaseModule {
     fun providesFireBaseAuth(firebase:Firebase): FirebaseAuth {
         return firebase.auth
     }
-   /* @Provides
-    @Singleton
-    fun providesFireBaseDataBase(db: FirebaseDatabase) : DatabaseReference {
-        return db.
-    }*/
-
 }

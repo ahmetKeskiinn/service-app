@@ -18,6 +18,10 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder().networkModule(NetworkModule(this)).roomModule(RoomModule(this)).sharedPrefModule(SharedPrefModule()).build()
+        appComponent = DaggerAppComponent.builder()
+            .networkModule(NetworkModule(this))
+            .roomModule(RoomModule(this))
+            .appModule(AppModule(this))
+            .build()
     }
 }
