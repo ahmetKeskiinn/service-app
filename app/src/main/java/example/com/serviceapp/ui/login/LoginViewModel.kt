@@ -4,10 +4,12 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.utils.Authentication
+import example.com.serviceapp.utils.AuthenticationStatus
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val sharedPreferences: SharedPreferences) : ViewModel() {
+class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
     fun firebaseAuth(listener: Authentication, eMail: String, password: String) {
         if (eMail.isEmpty() || password.isEmpty()) {
             listener.isSuccess(false)
@@ -17,11 +19,23 @@ class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val sharedPrefe
                     listener.isSuccess(task.isSuccessful)
                 }
         }
-        Log.d("TAG", "childList: " + auth.currentUser?.email)
-        Log.d("TAG", "childList: " + auth.currentUser?.displayName)
+        auth.currentUser?.email
     }
     fun saveInfos(id: String, pw: String) {
         sharedPreferences.edit().putString("id", id).apply()
         sharedPreferences.edit().putString("pw", pw).apply()
+    }
+    fun getStatus(listener: AuthenticationStatus){
+        Log.d("TAG", "getStatus: " + sharedPreferences.getString("id", ""))
+        val db = firebaseDB.getReference("users")
+        db.get().addOnSuccessListener {
+            for (child in it.getChildren()) {
+                if (child.child("userName").getValue().toString().equals(auth.currentUser?.email)){
+                    Log.d("TAG", "getStatus: ")
+                    listener.getStatus(child.child("status").getValue().toString())
+                }
+            }
+        }.addOnFailureListener {
+        }
     }
 }

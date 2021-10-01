@@ -13,10 +13,12 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentLoginBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.Authentication
+import example.com.serviceapp.utils.AuthenticationSplash
+import example.com.serviceapp.utils.AuthenticationStatus
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
-class LoginFragment : Fragment(), Authentication {
+class LoginFragment : Fragment(), Authentication,AuthenticationStatus {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var loginViewModel: LoginViewModel
@@ -47,22 +49,7 @@ class LoginFragment : Fragment(), Authentication {
     }
 
     private fun initialTablayout() {
-        binding.tabLayout.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    if (binding.tabLayout.selectedTabPosition == 0) {
-                        binding.id.setHint(R.string.email)
-                    } else if (binding.tabLayout.selectedTabPosition == 1) {
-                        binding.id.setHint(R.string.sevice)
-                    } else if (binding.tabLayout.selectedTabPosition == 2) {
-                        binding.id.setHint(R.string.teacherName)
-                    }
-                }
 
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
     }
 
     private fun initialButton() {
@@ -75,16 +62,25 @@ class LoginFragment : Fragment(), Authentication {
     }
 
     override fun isSuccess(boolean: Boolean) {
-        if (boolean) {
-            if (binding.tabLayout.selectedTabPosition == 0) {
-                Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mapFragment)
-            } else if (binding.tabLayout.selectedTabPosition == 1) {
-                Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainServiceFragment)
-            } else if (binding.tabLayout.selectedTabPosition == 2) {
-                Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainAdminFragment)
-            }
+        if(boolean){
+            loginViewModel.getStatus(this)
         } else {
             Toast.makeText(context, R.string.invalidateAuthetication, Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun getStatus(data: String) {
+        if(data.equals("family")){
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mapFragment)
+        } else if(data.equals("service")){
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainServiceFragment)
+
+        } else if(data.equals("admin")){
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainAdminFragment)
+        }
+        else{
+            Toast.makeText(context, R.string.somethingWentsWrong, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
