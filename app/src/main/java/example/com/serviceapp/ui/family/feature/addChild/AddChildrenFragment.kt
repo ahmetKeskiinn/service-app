@@ -1,4 +1,4 @@
-package example.com.serviceapp.ui.family.feature
+package example.com.serviceapp.ui.family.feature.addChild
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -50,7 +50,8 @@ class AddChildrenFragment : Fragment() {
 
     private fun initalButton() {
         binding.addButton.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+            addChildrenFragment.addChild(AddChild(binding.childrenName.text.toString(),binding.childrenNumber.text.toString(),binding.serviceCheckBox.isChecked,null))
+            //Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)
         }
     }
 }

@@ -1,4 +1,4 @@
-package example.com.serviceapp.ui.family.feature
+package example.com.serviceapp.ui.family.feature.safetyLocation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,6 +36,7 @@ class SelectSafetyLocationFragment : Fragment() {
     }
 
     private fun initialVM() {
-        selectedSafetyViewModel = ViewModelProvider(this, viewModelFactory).get(SelectedSafetyLocationViewModel::class.java)
+        selectedSafetyViewModel = ViewModelProvider(this, viewModelFactory).get(
+            SelectedSafetyLocationViewModel::class.java)
     }
 }

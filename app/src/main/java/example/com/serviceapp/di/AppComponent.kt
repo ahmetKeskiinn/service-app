@@ -8,9 +8,9 @@ import example.com.serviceapp.di.RoomModule
 import example.com.serviceapp.di.SharedPrefModule
 import example.com.serviceapp.ui.LoginViewModelModule
 import example.com.serviceapp.ui.family.FamilyModule
-import example.com.serviceapp.ui.family.feature.AddChildrenFragment
-import example.com.serviceapp.ui.family.feature.FamilyFragment
-import example.com.serviceapp.ui.family.feature.SelectSafetyLocationFragment
+import example.com.serviceapp.ui.family.feature.addChild.AddChildrenFragment
+import example.com.serviceapp.ui.family.feature.main.FamilyFragment
+import example.com.serviceapp.ui.family.feature.safetyLocation.SelectSafetyLocationFragment
 import example.com.serviceapp.ui.login.LoginFragment
 import example.com.serviceapp.ui.service.ServiceModule
 import example.com.serviceapp.ui.service.feature.ChatServiceFragment

@@ -2,6 +2,8 @@ package example.com.serviceapp.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
@@ -11,8 +13,23 @@ import javax.inject.Singleton
 class FireBaseModule {
     @Provides
     @Singleton
-    fun providesFireBaseAuth(): FirebaseAuth {
-        val firebase = Firebase.auth
-        return firebase
+    fun providesFireBase(): Firebase{
+        return Firebase
     }
+    @Provides
+    @Singleton
+    fun providesFireBaseDataBase():FirebaseDatabase{
+        return FirebaseDatabase.getInstance()
+    }
+    @Provides
+    @Singleton
+    fun providesFireBaseAuth(firebase:Firebase): FirebaseAuth {
+        return firebase.auth
+    }
+   /* @Provides
+    @Singleton
+    fun providesFireBaseDataBase(db: FirebaseDatabase) : DatabaseReference {
+        return db.
+    }*/
+
 }

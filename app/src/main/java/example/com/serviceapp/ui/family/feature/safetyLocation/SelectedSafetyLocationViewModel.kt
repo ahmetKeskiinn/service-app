@@ -1,4 +1,4 @@
-package example.com.serviceapp.ui.family.feature
+package example.com.serviceapp.ui.family.feature.safetyLocation
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

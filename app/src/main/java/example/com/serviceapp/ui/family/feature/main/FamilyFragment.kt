@@ -1,4 +1,4 @@
-package example.com.serviceapp.ui.family.feature
+package example.com.serviceapp.ui.family.feature.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

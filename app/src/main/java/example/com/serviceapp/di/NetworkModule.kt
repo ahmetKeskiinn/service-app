@@ -23,7 +23,6 @@ class NetworkModule(private val application: Application) {
     internal fun provideOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
-
         val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
         val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()

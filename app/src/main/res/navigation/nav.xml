@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="example.com.serviceapp.ui.family.feature.FamilyFragment"
+        android:name="example.com.serviceapp.ui.family.feature.main.FamilyFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_family" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/addChildrenFragment"
-        android:name="example.com.serviceapp.ui.family.feature.AddChildrenFragment"
+        android:name="example.com.serviceapp.ui.family.feature.addChild.AddChildrenFragment"
         android:label="fragment_add_children"
         tools:layout="@layout/fragment_add_children" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectSafetyLocationFragment"
-        android:name="example.com.serviceapp.ui.family.feature.SelectSafetyLocationFragment"
+        android:name="example.com.serviceapp.ui.family.feature.safetyLocation.SelectSafetyLocationFragment"
         android:label="fragment_select_safety_location"
         tools:layout="@layout/fragment_select_safety_location" >
         <action

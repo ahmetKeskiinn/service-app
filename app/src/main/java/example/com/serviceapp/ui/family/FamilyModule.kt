@@ -5,9 +5,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import example.com.mapproject.utils.ViewModelKey
-import example.com.serviceapp.ui.family.feature.AddChildrenViewModel
-import example.com.serviceapp.ui.family.feature.FamilyViewModel
-import example.com.serviceapp.ui.family.feature.SelectedSafetyLocationViewModel
+import example.com.serviceapp.ui.family.feature.addChild.AddChildrenViewModel
+import example.com.serviceapp.ui.family.feature.main.FamilyViewModel
+import example.com.serviceapp.ui.family.feature.safetyLocation.SelectedSafetyLocationViewModel
 
 @Module
 abstract class FamilyModule {
