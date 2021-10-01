@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val sharedPrefe
         Log.d("TAG", "childList: " + auth.currentUser?.email)
         Log.d("TAG", "childList: " + auth.currentUser?.displayName)
     }
-    fun saveInfos(id: String, pw: String){
+    fun saveInfos(id: String, pw: String) {
         sharedPreferences.edit().putString("id", id).apply()
         sharedPreferences.edit().putString("pw", pw).apply()
     }

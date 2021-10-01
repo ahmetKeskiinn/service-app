@@ -67,8 +67,8 @@ class LoginFragment : Fragment(), Authentication {
 
     private fun initialButton() {
         binding.sign.setOnClickListener {
-            if(binding.rememberMe.isChecked){
-                loginViewModel.saveInfos(binding.id.text.toString(),binding.pw.text.toString())
+            if (binding.rememberMe.isChecked) {
+                loginViewModel.saveInfos(binding.id.text.toString(), binding.pw.text.toString())
             }
             loginViewModel.firebaseAuth(this, binding.id.text.toString(), binding.pw.text.toString())
         }

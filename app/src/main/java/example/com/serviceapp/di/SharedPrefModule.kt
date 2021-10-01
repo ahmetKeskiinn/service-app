@@ -13,8 +13,10 @@ class SharedPrefModule {
     @Singleton
     fun providesSharedPreferences(application: Application?): SharedPreferences {
         val sharedPreferences: SharedPreferences
-        sharedPreferences =  application?.applicationContext!!.getSharedPreferences("LoginShared",
-            Context.MODE_PRIVATE)
+        sharedPreferences = application?.applicationContext!!.getSharedPreferences(
+            "LoginShared",
+            Context.MODE_PRIVATE
+        )
         return sharedPreferences
     }
 }

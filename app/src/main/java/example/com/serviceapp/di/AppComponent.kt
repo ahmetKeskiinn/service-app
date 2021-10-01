@@ -1,9 +1,14 @@
 package example.com.mapproject.di
 
 import dagger.Component
-import example.com.serviceapp.di.*
-import example.com.serviceapp.ui.SplashFragment
+import example.com.serviceapp.di.AppModule
+import example.com.serviceapp.di.FactoryModule
+import example.com.serviceapp.di.FireBaseModule
+import example.com.serviceapp.di.NetworkModule
+import example.com.serviceapp.di.RoomModule
+import example.com.serviceapp.di.SharedPrefModule
 import example.com.serviceapp.ui.LoginViewModelModule
+import example.com.serviceapp.ui.SplashFragment
 import example.com.serviceapp.ui.SplashScreenModule
 import example.com.serviceapp.ui.family.FamilyModule
 import example.com.serviceapp.ui.family.feature.addChild.AddChildrenFragment
@@ -42,5 +47,4 @@ interface AppComponent {
     fun inject(chatServiceFragment: ChatServiceFragment)
     fun inject(mainServiceFragment: MainServiceFragment)
     fun inject(mainAdminFragment: MainAdminFragment)
-
 }

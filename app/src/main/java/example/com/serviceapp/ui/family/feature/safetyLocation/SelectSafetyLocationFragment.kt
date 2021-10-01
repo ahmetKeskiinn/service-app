@@ -37,6 +37,7 @@ class SelectSafetyLocationFragment : Fragment() {
 
     private fun initialVM() {
         selectedSafetyViewModel = ViewModelProvider(this, viewModelFactory).get(
-            SelectedSafetyLocationViewModel::class.java)
+            SelectedSafetyLocationViewModel::class.java
+        )
     }
 }

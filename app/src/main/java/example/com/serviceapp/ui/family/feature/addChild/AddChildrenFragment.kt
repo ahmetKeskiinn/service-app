@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
@@ -50,8 +48,15 @@ class AddChildrenFragment : Fragment() {
 
     private fun initalButton() {
         binding.addButton.setOnClickListener {
-            addChildrenFragment.addChild(AddChild(binding.childrenName.text.toString(),binding.childrenNumber.text.toString(),binding.serviceCheckBox.isChecked,null))
-            //Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+            addChildrenFragment.addChild(
+                AddChild(
+                    binding.childrenName.text.toString(),
+                    binding.childrenNumber.text.toString(),
+                    binding.serviceCheckBox.isChecked,
+                    null
+                )
+            )
+            // Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)
         }
     }
 }
