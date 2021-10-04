@@ -13,14 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentFamilyBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.AdminRecyclerAdapter
 import example.com.serviceapp.utils.ViewModelFactory
-import example.com.serviceapp.utils.family.ChildrenData
 import example.com.serviceapp.utils.family.FamilyRecylerAdapter
 import javax.inject.Inject
 
-class FamilyFragment : Fragment(), ChildrenData {
+class FamilyFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var familyViewModel: FamilyViewModel
@@ -70,13 +67,9 @@ class FamilyFragment : Fragment(), ChildrenData {
         }
     }
     private fun getData(){
-        familyViewModel.data.observe(viewLifecycleOwner, Observer {
+        familyViewModel.getChildList().observe(viewLifecycleOwner, Observer {
             Log.d("TAG", "initialRecycler: " + it.size)
             recyclerAdapter.submitList(it)
         })
-    }
-
-    override fun childrenData(data: ArrayList<AddChild>) {
-        recyclerAdapter.submitList(data)
     }
 }

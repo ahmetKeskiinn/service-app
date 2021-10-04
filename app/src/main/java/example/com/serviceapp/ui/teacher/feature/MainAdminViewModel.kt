@@ -5,11 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.authenticationUtils.admin.AdminRecycler
 import javax.inject.Inject
 
 class MainAdminViewModel @Inject constructor(val db: FirebaseDatabase) : ViewModel() {
-    var data: MutableLiveData<List<AddChild>> = getRequestChildrenx()
+    var data: MutableLiveData<List<AddChild>> = getRequestChildren()
     fun getRequestChildren(): MutableLiveData<List<AddChild>> {
         val db = db.getReference("addChildrenRequest")
         val listt = MutableLiveData<List<AddChild>>()

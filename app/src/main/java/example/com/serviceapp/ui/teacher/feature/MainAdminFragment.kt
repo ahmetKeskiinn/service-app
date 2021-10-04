@@ -47,7 +47,6 @@ class MainAdminFragment : Fragment(), ClickListener {
         mainAdminViewModel = ViewModelProvider(this, viewModelFactory).get(MainAdminViewModel::class.java)
     }
     private fun getRequestData() {
-        //mainAdminViewModel.getRequestChildren(this)
         mainAdminViewModel.getRequestChildren().observe(viewLifecycleOwner, Observer {
             recyclerAdapter.submitList(it)
         })
@@ -60,7 +59,6 @@ class MainAdminFragment : Fragment(), ClickListener {
             adapter = recyclerAdapter
         }
     }
-
 
     override fun itemAcceptClick(data: AddChild) {
         mainAdminViewModel.addChildren(data)
