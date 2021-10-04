@@ -36,7 +36,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addChildrenButton" />
+        app:layout_constraintTop_toBottomOf="@+id/addChildrenButton"
+        tools:listitem="@layout/family_recyclerview_item"/>
 
     <TextView
         android:id="@+id/addLocationButton"

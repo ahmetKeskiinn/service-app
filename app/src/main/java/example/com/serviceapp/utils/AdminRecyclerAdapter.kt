@@ -1,6 +1,5 @@
-package example.com.serviceapp.utils.AuthenticationUtils.Admin
+package example.com.serviceapp.utils
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
+import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 
 class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<AddChild, AdminRecyclerAdapter.ChildrenHolder>(
     diffCallback
@@ -44,11 +44,10 @@ class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<Ad
         }
         override fun onClick(v: View?) {
             if (v == acceptButton) {
-                Log.d("TAG", "onClick: ")
                 if (adapterPosition != RecyclerView.NO_POSITION)
                     getItem(adapterPosition)?.let { it1 ->
-                        listener.itemAcceptClick(it1)
-                        Log.d("TAG", "onClick1: ")
+                        listener.
+                        itemAcceptClick(it1)
                     }
             }
             if (v == rejectButton) {

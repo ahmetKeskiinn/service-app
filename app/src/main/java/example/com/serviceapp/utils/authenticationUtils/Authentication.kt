@@ -1,4 +1,4 @@
-package example.com.serviceapp.utils.AuthenticationUtils
+package example.com.serviceapp.utils.authenticationUtils
 
 interface Authentication {
     fun isSuccess(boolean: Boolean)

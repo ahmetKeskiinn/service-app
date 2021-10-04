@@ -1,31 +1,35 @@
 package example.com.serviceapp.ui.teacher.feature
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.AdminRecycler
+import example.com.serviceapp.utils.authenticationUtils.admin.AdminRecycler
 import javax.inject.Inject
 
 class MainAdminViewModel @Inject constructor(val db: FirebaseDatabase) : ViewModel() {
-
-    fun getRequestChildren(listener: AdminRecycler) {
+    var data: MutableLiveData<List<AddChild>> = getRequestChildrenx()
+    fun getRequestChildren(): MutableLiveData<List<AddChild>> {
         val db = db.getReference("addChildrenRequest")
-        var list = ArrayList<AddChild>()
+        val listt = MutableLiveData<List<AddChild>>()
+        val list = ArrayList<AddChild>()
         db.get().addOnSuccessListener {
             for (child in it.getChildren()) {
+                Log.d("TAG", "getRequestChildrenx: ")
                 list.add(
-                    AddChild(
-                        child.child("nameSurname").getValue().toString(),
-                        child.child("schoolNumber").getValue().toString(),
-                        child.child("service").getValue().toString().toBoolean(),
-                        child.child("parentName").getValue().toString()
-                    )
+                        AddChild(
+                                child.child("nameSurname").getValue().toString(),
+                                child.child("schoolNumber").getValue().toString(),
+                                child.child("service").getValue().toString().toBoolean(),
+                                child.child("parentName").getValue().toString()
+                        )
                 )
             }
-            listener.childList(list)
+            listt.value = list
         }.addOnFailureListener {
         }
+        return listt
     }
     fun addChildren(model: AddChild) {
         Log.d("TAG", "addChildren: ")

@@ -5,18 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import example.com.serviceapp.databinding.FragmentMainAdminBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.AdminRecycler
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.AdminRecyclerAdapter
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.ClickListener
+import example.com.serviceapp.utils.AdminRecyclerAdapter
+import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
-class MainAdminFragment : Fragment(), AdminRecycler, ClickListener {
+class MainAdminFragment : Fragment(), ClickListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var mainAdminViewModel: MainAdminViewModel
@@ -47,7 +47,10 @@ class MainAdminFragment : Fragment(), AdminRecycler, ClickListener {
         mainAdminViewModel = ViewModelProvider(this, viewModelFactory).get(MainAdminViewModel::class.java)
     }
     private fun getRequestData() {
-        mainAdminViewModel.getRequestChildren(this)
+        //mainAdminViewModel.getRequestChildren(this)
+        mainAdminViewModel.getRequestChildren().observe(viewLifecycleOwner, Observer {
+            recyclerAdapter.submitList(it)
+        })
     }
     private fun initialRecycler() {
         recyclerAdapter = AdminRecyclerAdapter(this)
@@ -58,9 +61,6 @@ class MainAdminFragment : Fragment(), AdminRecycler, ClickListener {
         }
     }
 
-    override fun childList(list: ArrayList<AddChild>) {
-        recyclerAdapter.submitList(list)
-    }
 
     override fun itemAcceptClick(data: AddChild) {
         mainAdminViewModel.addChildren(data)

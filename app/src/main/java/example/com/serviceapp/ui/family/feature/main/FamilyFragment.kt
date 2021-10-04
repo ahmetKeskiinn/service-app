@@ -1,23 +1,32 @@
 package example.com.serviceapp.ui.family.feature.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentFamilyBinding
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.ui.family.feature.addChild.AddChild
+import example.com.serviceapp.utils.AdminRecyclerAdapter
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.family.ChildrenData
+import example.com.serviceapp.utils.family.FamilyRecylerAdapter
 import javax.inject.Inject
 
-class FamilyFragment : Fragment() {
+class FamilyFragment : Fragment(), ChildrenData {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var familyViewModel: FamilyViewModel
     private lateinit var binding: FragmentFamilyBinding
+    private lateinit var recyclerAdapter: FamilyRecylerAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,7 +40,8 @@ class FamilyFragment : Fragment() {
         initialUI()
         initialVM()
         initialTextViews()
-        initialRecyclerView()
+        initialRecycler()
+        getData()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -51,9 +61,22 @@ class FamilyFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
         }
     }
+    private fun initialRecycler() {
+        recyclerAdapter = FamilyRecylerAdapter()
+        binding.childrenRecycler.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            setHasFixedSize(true)
+            adapter = recyclerAdapter
+        }
+    }
+    private fun getData(){
+        familyViewModel.data.observe(viewLifecycleOwner, Observer {
+            Log.d("TAG", "initialRecycler: " + it.size)
+            recyclerAdapter.submitList(it)
+        })
+    }
 
-    private fun initialRecyclerView() {
-        familyViewModel.childList()
-        binding.childrenRecycler
+    override fun childrenData(data: ArrayList<AddChild>) {
+        recyclerAdapter.submitList(data)
     }
 }

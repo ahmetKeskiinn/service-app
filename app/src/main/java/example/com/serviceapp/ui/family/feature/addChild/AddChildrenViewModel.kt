@@ -3,7 +3,7 @@ package example.com.serviceapp.ui.family.feature.addChild
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.AddChildren
+import example.com.serviceapp.utils.authenticationUtils.admin.AddChildren
 import javax.inject.Inject
 
 class AddChildrenViewModel @Inject constructor(val fireBase: FirebaseAuth, val firebaseDatabase: FirebaseDatabase) : ViewModel() {

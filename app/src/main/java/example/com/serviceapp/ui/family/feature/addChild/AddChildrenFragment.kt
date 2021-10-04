@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.utils.AuthenticationUtils.Admin.AddChildren
+import example.com.serviceapp.utils.authenticationUtils.admin.AddChildren
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 

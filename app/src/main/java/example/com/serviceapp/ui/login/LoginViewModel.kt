@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import example.com.serviceapp.utils.AuthenticationUtils.Authentication
-import example.com.serviceapp.utils.AuthenticationUtils.AuthenticationStatus
+import example.com.serviceapp.utils.authenticationUtils.Authentication
+import example.com.serviceapp.utils.authenticationUtils.AuthenticationStatus
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
@@ -19,7 +19,6 @@ class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB:
                     listener.isSuccess(task.isSuccessful)
                 }
         }
-        auth.currentUser?.email
     }
     fun saveInfos(id: String, pw: String) {
         sharedPreferences.edit().putString("id", id).apply()
