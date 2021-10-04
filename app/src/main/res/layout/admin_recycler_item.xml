@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/recyclerItem">
+    <LinearLayout
+        android:id="@+id/recyclerItemLayout"
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/childrenNameSurname"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="asdsa" />
+            <TextView
+                android:id="@+id/childrenNumber"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+
+                android:text="asdsa" />
+            <TextView
+                android:id="@+id/childrenParent"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+
+                android:text="asdsa" />
+
+            <ImageView
+                android:id="@+id/acceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                app:srcCompat="@drawable/admin_check_icon" />
+
+            <ImageView
+                android:id="@+id/rejectButton"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/admin_reject_icon" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

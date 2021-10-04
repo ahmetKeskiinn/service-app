@@ -1,17 +1,17 @@
 package example.com.serviceapp.ui.family.feature.addChild
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import example.com.serviceapp.utils.AuthenticationUtils.Admin.AddChildren
 import javax.inject.Inject
 
 class AddChildrenViewModel @Inject constructor(val fireBase: FirebaseAuth, val firebaseDatabase: FirebaseDatabase) : ViewModel() {
-    fun addChild(childModel: AddChild) {
-        val db = firebaseDatabase.getReference("children")
+    fun addChild(childModel: AddChild, listener: AddChildren) {
+        val db = firebaseDatabase.getReference("addChildrenRequest")
         childModel.parentName = fireBase.currentUser?.email.toString()
-        db.child(childModel.nameSurname.toString()).setValue(childModel).addOnSuccessListener {
-            Log.d("TAG", "addChild: ")
+        db.child(childModel.nameSurname.toString()).setValue(childModel).addOnCompleteListener { task ->
+            listener.isSuccess(task.isSuccessful)
         }
     }
 }

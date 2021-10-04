@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.utils.AuthenticationUtils.Admin.AddChildren
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
-class AddChildrenFragment : Fragment() {
+class AddChildrenFragment : Fragment(), AddChildren {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var addChildrenFragment: AddChildrenViewModel
@@ -54,9 +58,17 @@ class AddChildrenFragment : Fragment() {
                     binding.childrenNumber.text.toString(),
                     binding.serviceCheckBox.isChecked,
                     null
-                )
+                ),
+                this
             )
-            // Navigation.findNavController(it).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+        }
+    }
+
+    override fun isSuccess(boolean: Boolean) {
+        if (boolean) {
+            Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+        } else {
+            Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
         }
     }
 }
