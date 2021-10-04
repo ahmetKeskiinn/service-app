@@ -1,4 +1,4 @@
-package example.com.serviceapp.utils
+package example.com.serviceapp.utils.adapters
 
 import android.view.LayoutInflater
 import android.view.View

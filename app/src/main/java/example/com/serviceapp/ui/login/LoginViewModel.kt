@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import example.com.serviceapp.utils.authenticationUtils.Authentication
-import example.com.serviceapp.utils.authenticationUtils.AuthenticationStatus
+import example.com.serviceapp.utils.authenticationUtils.login.Authentication
+import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
