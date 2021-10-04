@@ -13,7 +13,7 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentFamilyBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
-import example.com.serviceapp.utils.family.FamilyRecylerAdapter
+import example.com.serviceapp.utils.adapters.FamilyRecylerAdapter
 import javax.inject.Inject
 
 class FamilyFragment : Fragment() {

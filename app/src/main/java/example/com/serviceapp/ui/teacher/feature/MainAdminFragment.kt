@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import example.com.serviceapp.databinding.FragmentMainAdminBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.AdminRecyclerAdapter
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.adapters.AdminRecyclerAdapter
 import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 import javax.inject.Inject
 
