@@ -1,7 +1,6 @@
 package example.com.serviceapp.ui.family.feature.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,10 +65,13 @@ class FamilyFragment : Fragment() {
             adapter = recyclerAdapter
         }
     }
-    private fun getData(){
-        familyViewModel.getChildList().observe(viewLifecycleOwner, Observer {
-            Log.d("TAG", "initialRecycler: " + it.size)
-            recyclerAdapter.submitList(it)
-        })
+    private fun getData() {
+        familyViewModel.getChildList().observe(
+            viewLifecycleOwner,
+            Observer
+            {
+                recyclerAdapter.submitList(it)
+            }
+        )
     }
 }

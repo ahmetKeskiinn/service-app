@@ -11,14 +11,14 @@ import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
 
 class FamilyRecylerAdapter : ListAdapter<AddChild, FamilyRecylerAdapter.ChildrenHolder>(
-        diffCallback
+    diffCallback
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildrenHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-                R.layout.family_recyclerview_item,
-                parent,
-                false
+            R.layout.family_recyclerview_item,
+            parent,
+            false
         )
         return ChildrenHolder(itemView)
     }
@@ -41,8 +41,8 @@ private val diffCallback = object : DiffUtil.ItemCallback<AddChild>() {
     }
 
     override fun areContentsTheSame(
-            oldItem: AddChild,
-            newItem: AddChild
+        oldItem: AddChild,
+        newItem: AddChild
     ): Boolean {
         return oldItem.schoolNumber.equals(newItem.schoolNumber)
     }

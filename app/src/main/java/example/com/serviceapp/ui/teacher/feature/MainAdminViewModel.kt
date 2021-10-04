@@ -17,12 +17,12 @@ class MainAdminViewModel @Inject constructor(val db: FirebaseDatabase) : ViewMod
             for (child in it.getChildren()) {
                 Log.d("TAG", "getRequestChildrenx: ")
                 list.add(
-                        AddChild(
-                                child.child("nameSurname").getValue().toString(),
-                                child.child("schoolNumber").getValue().toString(),
-                                child.child("service").getValue().toString().toBoolean(),
-                                child.child("parentName").getValue().toString()
-                        )
+                    AddChild(
+                        child.child("nameSurname").getValue().toString(),
+                        child.child("schoolNumber").getValue().toString(),
+                        child.child("service").getValue().toString().toBoolean(),
+                        child.child("parentName").getValue().toString()
+                    )
                 )
             }
             listt.value = list

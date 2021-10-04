@@ -46,8 +46,7 @@ class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<Ad
             if (v == acceptButton) {
                 if (adapterPosition != RecyclerView.NO_POSITION)
                     getItem(adapterPosition)?.let { it1 ->
-                        listener.
-                        itemAcceptClick(it1)
+                        listener.itemAcceptClick(it1)
                     }
             }
             if (v == rejectButton) {

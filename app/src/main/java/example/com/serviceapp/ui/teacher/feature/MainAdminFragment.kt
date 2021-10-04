@@ -12,8 +12,8 @@ import example.com.serviceapp.databinding.FragmentMainAdminBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
 import example.com.serviceapp.utils.AdminRecyclerAdapter
-import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 import javax.inject.Inject
 
 class MainAdminFragment : Fragment(), ClickListener {
@@ -47,9 +47,12 @@ class MainAdminFragment : Fragment(), ClickListener {
         mainAdminViewModel = ViewModelProvider(this, viewModelFactory).get(MainAdminViewModel::class.java)
     }
     private fun getRequestData() {
-        mainAdminViewModel.getRequestChildren().observe(viewLifecycleOwner, Observer {
-            recyclerAdapter.submitList(it)
-        })
+        mainAdminViewModel.getRequestChildren().observe(
+            viewLifecycleOwner,
+            Observer {
+                recyclerAdapter.submitList(it)
+            }
+        )
     }
     private fun initialRecycler() {
         recyclerAdapter = AdminRecyclerAdapter(this)

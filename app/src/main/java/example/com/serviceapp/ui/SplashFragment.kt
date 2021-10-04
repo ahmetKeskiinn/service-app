@@ -11,10 +11,10 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.authenticationUtils.Authentication
 import example.com.serviceapp.utils.authenticationUtils.AuthenticationSplash
 import example.com.serviceapp.utils.authenticationUtils.AuthenticationStatus
-import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
 class SplashFragment : Fragment(), AuthenticationSplash, Authentication, AuthenticationStatus {
