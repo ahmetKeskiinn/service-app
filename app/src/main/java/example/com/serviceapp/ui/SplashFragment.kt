@@ -18,6 +18,7 @@ import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationSpla
 import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
 import example.com.serviceapp.utils.family
 import example.com.serviceapp.utils.service
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class SplashFragment : Fragment(), AuthenticationSplash, Authentication, AuthenticationStatus {
@@ -36,6 +37,7 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
     }
     override fun onStart() {
         initialVM()
+        startAnimation()
         Handler().postDelayed({ this.goActivity() }, 500)
         super.onStart()
     }
@@ -44,8 +46,23 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
         splashScreen = ViewModelProvider(this, viewModelFactory).get(SplashScreenViewModel::class.java)
     }
 
-    fun goActivity() {
+    private fun goActivity() {
         splashScreen.getInformations(this)
+    }
+
+    private fun startAnimation(){
+        runBlocking {
+            (Runnable {
+                binding.animationView.setVisibility(View.VISIBLE)
+            })
+        }    }
+
+    private fun stopAnimation() {
+        runBlocking {
+            (Runnable {
+                binding.animationView.setVisibility(View.INVISIBLE)
+            })
+        }
     }
 
     override fun isSuccess(data: String, boolean: Boolean) {
@@ -71,10 +88,13 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
 
     override fun getStatus(data: String) {
         if (data.equals(family)) {
+            stopAnimation()
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mapFragment)
         } else if (data.equals(service)) {
+            stopAnimation()
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainServiceFragment)
         } else if (data.equals(admin)) {
+            stopAnimation()
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainAdminFragment)
         } else {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
