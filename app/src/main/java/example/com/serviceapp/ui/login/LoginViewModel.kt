@@ -7,6 +7,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.utils.authenticationUtils.login.Authentication
 import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
+import example.com.serviceapp.utils.idShared
+import example.com.serviceapp.utils.pwShared
+import example.com.serviceapp.utils.status
+import example.com.serviceapp.utils.userName
+import example.com.serviceapp.utils.users
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
@@ -21,17 +26,16 @@ class LoginViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB:
         }
     }
     fun saveInfos(id: String, pw: String) {
-        sharedPreferences.edit().putString("id", id).apply()
-        sharedPreferences.edit().putString("pw", pw).apply()
+        sharedPreferences.edit().putString(idShared, id).apply()
+        sharedPreferences.edit().putString(pwShared, pw).apply()
     }
     fun getStatus(listener: AuthenticationStatus) {
-        Log.d("TAG", "getStatus: " + sharedPreferences.getString("id", ""))
-        val db = firebaseDB.getReference("users")
+        val db = firebaseDB.getReference(users)
         db.get().addOnSuccessListener {
             for (child in it.getChildren()) {
-                if (child.child("userName").getValue().toString().equals(auth.currentUser?.email)) {
+                if (child.child(userName).getValue().toString().equals(auth.currentUser?.email)) {
                     Log.d("TAG", "getStatus: ")
-                    listener.getStatus(child.child("status").getValue().toString())
+                    listener.getStatus(child.child(status).getValue().toString())
                 }
             }
         }.addOnFailureListener {

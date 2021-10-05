@@ -7,6 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import example.com.serviceapp.ui.service.db.ServiceDataBase
+import example.com.serviceapp.utils.dbName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class RoomModule(val application: Application) {
     @Singleton
     @Provides
     fun providesRoomDatabase(): ServiceDataBase {
-        val db = Room.databaseBuilder(application, ServiceDataBase::class.java, "fav_db")
+        val db = Room.databaseBuilder(application, ServiceDataBase::class.java, dbName)
             .fallbackToDestructiveMigration()
             .addCallback(databaseCallback)
             .build()

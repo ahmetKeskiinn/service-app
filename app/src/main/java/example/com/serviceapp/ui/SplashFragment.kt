@@ -12,9 +12,12 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.admin
 import example.com.serviceapp.utils.authenticationUtils.login.Authentication
 import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationSplash
 import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
+import example.com.serviceapp.utils.family
+import example.com.serviceapp.utils.service
 import javax.inject.Inject
 
 class SplashFragment : Fragment(), AuthenticationSplash, Authentication, AuthenticationStatus {
@@ -67,11 +70,11 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
     }
 
     override fun getStatus(data: String) {
-        if (data.equals("family")) {
+        if (data.equals(family)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mapFragment)
-        } else if (data.equals("service")) {
+        } else if (data.equals(service)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainServiceFragment)
-        } else if (data.equals("admin")) {
+        } else if (data.equals(admin)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainAdminFragment)
         } else {
             Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)

@@ -12,8 +12,11 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentLoginBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.admin
 import example.com.serviceapp.utils.authenticationUtils.login.Authentication
 import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
+import example.com.serviceapp.utils.family
+import example.com.serviceapp.utils.service
 import javax.inject.Inject
 
 class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
@@ -63,11 +66,11 @@ class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
     }
 
     override fun getStatus(data: String) {
-        if (data.equals("family")) {
+        if (data.equals(family)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mapFragment)
-        } else if (data.equals("service")) {
+        } else if (data.equals(service)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainServiceFragment)
-        } else if (data.equals("admin")) {
+        } else if (data.equals(admin)) {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mainAdminFragment)
         } else {
             Toast.makeText(context, R.string.somethingWentsWrong, Toast.LENGTH_SHORT).show()

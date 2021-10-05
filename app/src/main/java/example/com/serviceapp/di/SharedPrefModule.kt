@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
+import example.com.serviceapp.utils.sharedPrefName
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +15,7 @@ class SharedPrefModule {
     fun providesSharedPreferences(application: Application?): SharedPreferences {
         val sharedPreferences: SharedPreferences
         sharedPreferences = application?.applicationContext!!.getSharedPreferences(
-            "LoginShared",
+            sharedPrefName,
             Context.MODE_PRIVATE
         )
         return sharedPreferences

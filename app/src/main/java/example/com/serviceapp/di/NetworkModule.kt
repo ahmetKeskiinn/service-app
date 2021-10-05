@@ -5,6 +5,11 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import example.com.serviceapp.utils.GetService
+import example.com.serviceapp.utils.sizeX
+import example.com.serviceapp.utils.sizeY
+import example.com.serviceapp.utils.sizeZ
+import example.com.serviceapp.utils.timeOutOne
+import example.com.serviceapp.utils.timeOutTwo
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,14 +29,14 @@ class NetworkModule(private val application: Application) {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
         val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
-        val cache = Cache(cacheDir, 15 * 1024 * 1024)
+        val cache = Cache(cacheDir, sizeX * sizeY * sizeZ)
         return OkHttpClient.Builder()
             .cache(
                 cache
             )
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(timeOutOne, TimeUnit.SECONDS)
+            .readTimeout(timeOutTwo, TimeUnit.SECONDS)
+            .writeTimeout(timeOutTwo, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build()
     }
