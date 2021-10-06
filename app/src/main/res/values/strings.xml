@@ -12,7 +12,7 @@
     <string name="rememberMe">Remember Me</string>
     <string name="Login">Login</string>
     <string name="addChildren">Add Children</string>
-    <string name="addSafetyLcation">Add Safety Location</string>
+    <string name="addSafetyLcation">Safety Location</string>
     <string name="schoolNumber">SchoolNumber</string>
     <string name="childrenName">Children Name</string>
     <string name="add">Add</string>
@@ -21,4 +21,12 @@
     <string name="invalidateAuthetication">Authentication Error! Please Check Your E-Mail and Password!</string>
     <string name="somethingWentsWrong">Something Wents Wrong! Please Contact to Admin!</string>
     <string name="request">Registration requests</string>
+    <string name="chat">CHAT</string>
+    <string name="chatSub">With Driver</string>
+    <string name="list">LIST OF</string>
+    <string name="student">Student</string>
+    <string name="where">WHERE</string>
+    <string name="whereSub">Is The Bus?</string>
+    <string name="addNewStudent">ADD</string>
+    <string name="addNewStudentSub">New Student</string>
 </resources>

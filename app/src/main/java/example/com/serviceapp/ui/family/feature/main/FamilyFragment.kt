@@ -50,10 +50,10 @@ class FamilyFragment : Fragment() {
     }
 
     private fun initialTextViews() {
-        binding.addChildrenButton.setOnClickListener {
+        binding.newStudentCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_addChildrenFragment)
         }
-        binding.addLocationButton.setOnClickListener {
+        binding.safetyLocationCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
         }
     }

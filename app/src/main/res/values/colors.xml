@@ -11,4 +11,8 @@
     <color name="green">#00FF00</color>
     <color name="topColor">#FFFF00</color>
     <color name="buttonColor">#D1D100</color>
+    <color name="lightBlue">#7EB9BF</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="adminLightBlue">#ADD8E6</color>
+    <color name="pink">#FFC0CB</color>
 </resources>
