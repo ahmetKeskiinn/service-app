@@ -1,4 +1,4 @@
-package example.com.serviceapp.ui.service.feature
+package example.com.serviceapp.ui.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
 import javax.inject.Inject
 
-class ChatServiceFragment : Fragment() {
+class ChatFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var chatServiceViewModel: ChatServiceViewModel
+    private lateinit var chatServiceViewModel: ChatViewModel
     private lateinit var binding: FragmentChatServiceBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,6 @@ class ChatServiceFragment : Fragment() {
     }
 
     private fun initialVM() {
-        chatServiceViewModel = ViewModelProvider(this, viewModelFactory).get(ChatServiceViewModel::class.java)
+        chatServiceViewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)
     }
 }
