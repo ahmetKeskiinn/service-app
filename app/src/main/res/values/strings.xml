@@ -29,4 +29,6 @@
     <string name="whereSub">Is The Bus?</string>
     <string name="addNewStudent">ADD</string>
     <string name="addNewStudentSub">New Student</string>
+    <string name="welcomeParent">Welcome Parent</string>
+    <string name="nameSurname">Name Surname</string>
 </resources>
