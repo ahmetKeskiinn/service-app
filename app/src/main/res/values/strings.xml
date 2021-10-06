@@ -20,4 +20,5 @@
     <string name="chatButton">Chat</string>
     <string name="invalidateAuthetication">Authentication Error! Please Check Your E-Mail and Password!</string>
     <string name="somethingWentsWrong">Something Wents Wrong! Please Contact to Admin!</string>
+    <string name="request">Registration requests</string>
 </resources>
