@@ -29,6 +29,7 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialUI()
         initialVM()
+        initialClickListener()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -38,5 +39,10 @@ class ChatFragment : Fragment() {
 
     private fun initialVM() {
         chatServiceViewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)
+    }
+    private fun initialClickListener(){
+        binding.sendButton.setOnClickListener {
+            binding.sendText.text.clear()
+        }
     }
 }

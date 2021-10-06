@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,12 +34,25 @@ class FamilyFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        anim()
         initialUI()
         initialVM()
         initialTextViews()
         initialRecycler()
         getData()
         super.onViewCreated(view, savedInstanceState)
+    }
+    private fun anim(){
+        val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_components)
+        val animSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
+        val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.newStudentCardView.startAnimation(animSlideOut)
+        binding.safetyLocationCardView.startAnimation(animationSlideIn)
+        binding.chatCardView.startAnimation(animSlideOut)
+        binding.whereBusCardView.startAnimation(animationSlideIn)
+        binding.listOfStudentCardView.startAnimation(animationSlideIn)
+        binding.topImagView.startAnimation(animationFadeIn)
+        binding.topTw.startAnimation(animationFadeIn)
     }
 
     private fun initialUI() {
@@ -55,6 +69,9 @@ class FamilyFragment : Fragment() {
         }
         binding.safetyLocationCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
+        }
+        binding.chatCardView.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_chatServiceFragment)
         }
     }
     private fun initialRecycler() {
