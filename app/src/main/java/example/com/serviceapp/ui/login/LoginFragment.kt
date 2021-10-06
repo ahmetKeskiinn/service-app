@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,7 @@ class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setAnimationInComponents()
         initialUI()
         initialVM()
         initialButton()
@@ -46,6 +48,11 @@ class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
 
     private fun initialVM() {
         loginViewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
+    }
+    private fun setAnimationInComponents(){
+        val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.loginCardView.startAnimation(animationFadeIn)
+        binding.schoolBusImage.startAnimation(animationFadeIn)
     }
 
     private fun initialButton() {

@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentMainAdminBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
@@ -32,13 +34,20 @@ class MainAdminFragment : Fragment(), ClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setAnimationInComponents()
         initialUI()
         initialVM()
         initialRecycler()
         getRequestData()
         super.onViewCreated(view, savedInstanceState)
     }
-
+    private fun setAnimationInComponents(){
+        val animationSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
+        val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.addRequestRecyclerView.startAnimation(animationSlideOut)
+        binding.topImage.startAnimation(animationFadeIn)
+        binding.topTw.startAnimation(animationFadeIn)
+    }
     private fun initialUI() {
         MyApp.appComponent.inject(this)
     }

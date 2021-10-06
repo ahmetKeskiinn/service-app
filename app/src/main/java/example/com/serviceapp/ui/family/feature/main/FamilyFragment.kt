@@ -34,7 +34,7 @@ class FamilyFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        anim()
+        setAnimationInComponents()
         initialUI()
         initialVM()
         initialTextViews()
@@ -42,7 +42,7 @@ class FamilyFragment : Fragment() {
         getData()
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun anim(){
+    private fun setAnimationInComponents(){
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_components)
         val animSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
