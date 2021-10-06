@@ -40,7 +40,7 @@ class ChatFragment : Fragment() {
     private fun initialVM() {
         chatServiceViewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)
     }
-    private fun initialClickListener(){
+    private fun initialClickListener() {
         binding.sendButton.setOnClickListener {
             binding.sendText.text.clear()
         }

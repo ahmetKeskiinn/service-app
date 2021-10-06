@@ -42,7 +42,7 @@ class FamilyFragment : Fragment() {
         getData()
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun setAnimationInComponents(){
+    private fun setAnimationInComponents() {
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_components)
         val animSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
@@ -70,7 +70,7 @@ class FamilyFragment : Fragment() {
         binding.safetyLocationCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
         }
-        binding.chatCardView.setOnClickListener{
+        binding.chatCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_chatServiceFragment)
         }
     }

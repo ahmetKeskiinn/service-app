@@ -4,23 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/admin_recyclerview_gradient"
     tools:context=".ui.family.feature.addChild.AddChildrenFragment">
 
     <ImageView
         android:id="@+id/childPhoto"
         android:layout_marginTop="56dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        android:src="@drawable/addchildren" />
 
     <EditText
         android:id="@+id/childrenName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/login_edittext_corner"
+        android:paddingStart="44dp"
         android:ems="10"
         android:layout_marginTop="10dp"
         android:inputType="textPersonName"
@@ -31,9 +34,11 @@
 
     <EditText
         android:id="@+id/childrenNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/login_edittext_corner"
+        android:paddingStart="44dp"
         android:ems="10"
         android:hint="@string/schoolNumber"
         android:inputType="number"
@@ -45,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/service"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/childrenNumber"
         app:layout_constraintStart_toStartOf="@+id/childrenNumber"
@@ -52,13 +58,35 @@
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/add"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/serviceCheckBox"
         app:layout_constraintStart_toStartOf="@+id/serviceCheckBox"
         app:layout_constraintTop_toBottomOf="@+id/serviceCheckBox" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_student"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/childrenName"
+        app:layout_constraintStart_toStartOf="@+id/childrenName"
+        app:layout_constraintTop_toTopOf="@+id/childrenName" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_school_number"
+        app:layout_constraintBottom_toBottomOf="@+id/childrenNumber"
+        app:layout_constraintStart_toStartOf="@+id/childrenNumber"
+        app:layout_constraintTop_toTopOf="@+id/childrenNumber"
+        android:layout_marginStart="10dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

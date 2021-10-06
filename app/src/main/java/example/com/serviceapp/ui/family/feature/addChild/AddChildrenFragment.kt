@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -49,9 +50,18 @@ class AddChildrenFragment : Fragment(), AddChildren {
     private fun addInfos() {
         // if(binding)
     }
+    private fun hideAnimationInComponents() {
+        val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+        binding.childrenNumber.startAnimation(animationFadeIn)
+        binding.addButton.startAnimation(animationFadeIn)
+        binding.childPhoto.startAnimation(animationFadeIn)
+        binding.childrenName.startAnimation(animationFadeIn)
+        binding.serviceCheckBox.startAnimation(animationFadeIn)
+    }
 
     private fun initalButton() {
         binding.addButton.setOnClickListener {
+            hideAnimationInComponents()
             addChildrenFragment.addChild(
                 AddChild(
                     binding.childrenName.text.toString(),

@@ -50,18 +50,23 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
         splashScreen.getInformations(this)
     }
 
-    private fun startAnimation(){
+    private fun startAnimation() {
         runBlocking {
-            (Runnable {
-                binding.animationView.setVisibility(View.VISIBLE)
-            })
-        }    }
+            (
+                Runnable {
+                    binding.animationView.setVisibility(View.VISIBLE)
+                }
+                )
+        }
+    }
 
     private fun stopAnimation() {
         runBlocking {
-            (Runnable {
-                binding.animationView.setVisibility(View.INVISIBLE)
-            })
+            (
+                Runnable {
+                    binding.animationView.setVisibility(View.INVISIBLE)
+                }
+                )
         }
     }
 

@@ -49,7 +49,7 @@ class LoginFragment : Fragment(), Authentication, AuthenticationStatus {
     private fun initialVM() {
         loginViewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
     }
-    private fun setAnimationInComponents(){
+    private fun setAnimationInComponents() {
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.loginCardView.startAnimation(animationFadeIn)
         binding.schoolBusImage.startAnimation(animationFadeIn)

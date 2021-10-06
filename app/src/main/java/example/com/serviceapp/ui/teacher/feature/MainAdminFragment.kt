@@ -41,7 +41,7 @@ class MainAdminFragment : Fragment(), ClickListener {
         getRequestData()
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun setAnimationInComponents(){
+    private fun setAnimationInComponents() {
         val animationSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.addRequestRecyclerView.startAnimation(animationSlideOut)

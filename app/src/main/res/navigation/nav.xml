@@ -33,8 +33,7 @@
         <action
             android:id="@+id/action_addChildrenFragment_to_mapFragment"
             app:destination="@id/mapFragment"
-            app:enterAnim="@anim/slide_out"
-            app:exitAnim="@anim/slide_in"/>
+            app:enterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/selectSafetyLocationFragment"
