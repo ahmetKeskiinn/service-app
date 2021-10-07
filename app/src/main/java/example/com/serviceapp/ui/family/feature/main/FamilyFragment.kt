@@ -56,36 +56,40 @@ class FamilyFragment : Fragment() {
         binding.topImagView.startAnimation(animationFadeIn)
         binding.topTw.startAnimation(animationFadeIn)
     }
-    private fun listOfStudentButtonClicked(){
+    private fun listOfStudentButtonClicked() {
         val animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_recycler)
         binding.newStudentCardView.startAnimation(animationFadeOut)
         binding.whereBusCardView.startAnimation(animationFadeOut)
         binding.safetyLocationCardView.startAnimation(animationFadeOut)
-        Handler().postDelayed({
-            binding.newStudentCardView.isVisible = false
-            binding.whereBusCardView.isVisible = false
-            binding.safetyLocationCardView.isVisible = false
-            binding.childrenCardView.startAnimation(animationSlideIn)
-            binding.childrenCardView.isVisible = true
-        }, 1000)
-
+        Handler().postDelayed(
+            {
+                binding.newStudentCardView.isVisible = false
+                binding.whereBusCardView.isVisible = false
+                binding.safetyLocationCardView.isVisible = false
+                binding.childrenCardView.startAnimation(animationSlideIn)
+                binding.childrenCardView.isVisible = true
+            },
+            1000
+        )
     }
 
-    private fun hideListOfButton(){
+    private fun hideListOfButton() {
         val animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_out_recycler)
-        binding.newStudentCardView.startAnimation(animationFadeOut)
-        binding.whereBusCardView.startAnimation(animationFadeOut)
-        binding.safetyLocationCardView.startAnimation(animationFadeOut)
-        Handler().postDelayed({
-            binding.newStudentCardView.isVisible = true
-            binding.whereBusCardView.isVisible = true
-            binding.safetyLocationCardView.isVisible = true
-            binding.childrenCardView.startAnimation(animationSlideIn)
-            binding.childrenCardView.isVisible = false
-        }, 1000)
-
+        binding.childrenCardView.startAnimation(animationSlideIn)
+        binding.childrenCardView.isVisible = false
+        Handler().postDelayed(
+            {
+                binding.newStudentCardView.startAnimation(animationFadeOut)
+                binding.whereBusCardView.startAnimation(animationFadeOut)
+                binding.safetyLocationCardView.startAnimation(animationFadeOut)
+                binding.newStudentCardView.isVisible = true
+                binding.whereBusCardView.isVisible = true
+                binding.safetyLocationCardView.isVisible = true
+            },
+            1000
+        )
     }
 
     private fun initialUI() {
@@ -106,7 +110,7 @@ class FamilyFragment : Fragment() {
         binding.chatCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_chatServiceFragment)
         }
-        binding.listOfStudentCardView.setOnClickListener{
+        binding.listOfStudentCardView.setOnClickListener {
             listOfStudentButtonClicked()
             binding.listOfStudentCardView.isClickable = false
         }
