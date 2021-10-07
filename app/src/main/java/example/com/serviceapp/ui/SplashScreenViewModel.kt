@@ -1,12 +1,10 @@
 package example.com.serviceapp.ui
 
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import example.com.serviceapp.utils.authenticationUtils.login.Authentication
-import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationSplash
-import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
 import example.com.serviceapp.utils.idShared
 import example.com.serviceapp.utils.status
 import example.com.serviceapp.utils.userName
@@ -15,34 +13,41 @@ import javax.inject.Inject
 
 class SplashScreenViewModel @Inject constructor(val auth: FirebaseAuth, val firebaseDB: FirebaseDatabase, val sharedPreferences: SharedPreferences) : ViewModel() {
 
-    fun getInformations(listener: AuthenticationSplash) {
+    fun getInformations(): MutableLiveData<String> {
+        val getInfos = MutableLiveData<String>()
         if (!sharedPreferences.getString("id", "").toString().isEmpty() && !sharedPreferences.getString("pw", "").toString().isEmpty()) {
             val infos = sharedPreferences.getString("id", "").toString() + "," + sharedPreferences.getString("pw", "").toString()
-            listener.isSuccess(infos, true)
+            getInfos.value = infos
         } else {
-            listener.isSuccess("", false)
+            getInfos.value = ""
         }
+        return getInfos
     }
 
-    fun firebaseAuth(listener: Authentication, eMail: String, password: String) {
+    fun firebaseAuth(eMail: String, password: String): MutableLiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
         if (eMail.isEmpty() || password.isEmpty()) {
-            listener.isSuccess(false)
+            isSuccess.value = (false)
         } else {
             auth.signInWithEmailAndPassword(eMail, password)
                 .addOnCompleteListener { task ->
-                    listener.isSuccess(task.isSuccessful)
+                    isSuccess.value = (task.isSuccessful)
                 }
         }
+        return isSuccess
     }
-    fun getStatus(listener: AuthenticationStatus) {
+    fun getStatus(): MutableLiveData<String> {
+        val personStatus = MutableLiveData<String>()
         val db = firebaseDB.getReference(users)
         db.get().addOnSuccessListener {
             for (child in it.getChildren()) {
                 if (child.child(userName).getValue().toString().equals(sharedPreferences.getString(idShared, ""))) {
-                    listener.getStatus(child.child(status).getValue().toString())
+                    personStatus.value = child.child(status).getValue().toString()
                 }
             }
         }.addOnFailureListener {
+            personStatus.value = it.toString()
         }
+        return personStatus
     }
 }

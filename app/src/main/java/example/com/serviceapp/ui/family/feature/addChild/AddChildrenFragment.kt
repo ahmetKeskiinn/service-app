@@ -1,7 +1,6 @@
 package example.com.serviceapp.ui.family.feature.addChild
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
-import example.com.serviceapp.utils.authenticationUtils.admin.AddChildren
 import javax.inject.Inject
 
 class AddChildrenFragment : Fragment() {
@@ -67,14 +65,18 @@ class AddChildrenFragment : Fragment() {
                     binding.serviceCheckBox.isChecked,
                     null
                 )
-            ).observe(viewLifecycleOwner, Observer {
-                if (it) {
-                    Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT).show()
-                    Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
-                } else {
-                    Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
+            ).observe(
+                viewLifecycleOwner,
+                Observer
+                {
+                    if (it) {
+                        Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT).show()
+                        Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+                    } else {
+                        Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
+                    }
                 }
-            })
+            )
         }
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import example.com.serviceapp.R
@@ -13,15 +14,12 @@ import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.admin
-import example.com.serviceapp.utils.authenticationUtils.login.Authentication
-import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationSplash
-import example.com.serviceapp.utils.authenticationUtils.login.AuthenticationStatus
 import example.com.serviceapp.utils.family
 import example.com.serviceapp.utils.service
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class SplashFragment : Fragment(), AuthenticationSplash, Authentication, AuthenticationStatus {
+class SplashFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var splashScreen: SplashScreenViewModel
@@ -47,9 +45,56 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
     }
 
     private fun goActivity() {
-        splashScreen.getInformations(this)
+        splashScreen.getInformations().observe(
+            viewLifecycleOwner,
+            Observer
+            {
+                if (!it.isEmpty()) {
+                    auth(it)
+                } else {
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
+                }
+            }
+        )
+    }
+    private fun auth(infos: String) {
+        val list = infos.split(",")
+        splashScreen.firebaseAuth(
+            list.get(0),
+            list.get(1)
+        ).observe(
+            viewLifecycleOwner,
+            Observer
+            {
+                if (it) {
+                    getStatus()
+                } else {
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
+                }
+            }
+        )
     }
 
+    private fun getStatus() {
+        splashScreen.getStatus().observe(
+            viewLifecycleOwner,
+            Observer
+            {
+                if (it.equals(family)) {
+                    stopAnimation()
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mapFragment)
+                } else if (it.equals(service)) {
+                    stopAnimation()
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainServiceFragment)
+                } else if (it.equals(admin)) {
+                    stopAnimation()
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainAdminFragment)
+                } else {
+                    Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
+                }
+            }
+        )
+    }
     private fun startAnimation() {
         runBlocking {
             (
@@ -67,42 +112,6 @@ class SplashFragment : Fragment(), AuthenticationSplash, Authentication, Authent
                     binding.animationView.setVisibility(View.INVISIBLE)
                 }
                 )
-        }
-    }
-
-    override fun isSuccess(data: String, boolean: Boolean) {
-        if (!boolean) {
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
-        } else {
-            val list = data.split(",")
-            splashScreen.firebaseAuth(
-                this,
-                list.get(0),
-                list.get(1)
-            )
-        }
-    }
-
-    override fun isSuccess(boolean: Boolean) {
-        if (boolean) {
-            splashScreen.getStatus(this)
-        } else {
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
-        }
-    }
-
-    override fun getStatus(data: String) {
-        if (data.equals(family)) {
-            stopAnimation()
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mapFragment)
-        } else if (data.equals(service)) {
-            stopAnimation()
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainServiceFragment)
-        } else if (data.equals(admin)) {
-            stopAnimation()
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_mainAdminFragment)
-        } else {
-            Navigation.findNavController(binding.root).navigate(R.id.action_splashFragment2_to_loginFragment)
         }
     }
 }
