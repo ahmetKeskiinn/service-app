@@ -1,4 +1,4 @@
-package example.com.serviceapp.utils.authenticationUtils.admin
+package example.com.serviceapp.utils.adapters
 
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
 

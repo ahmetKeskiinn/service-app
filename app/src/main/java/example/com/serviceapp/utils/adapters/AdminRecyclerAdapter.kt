@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.authenticationUtils.admin.ClickListener
 
 class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<AddChild, AdminRecyclerAdapter.ChildrenHolder>(
     diffCallback
