@@ -5,6 +5,8 @@
     <LinearLayout
         android:id="@+id/recyclerItemLayout"
         android:layout_height="150dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/admin_recyclerview_gradient"
         android:layout_width="match_parent"
         android:orientation="horizontal">
@@ -14,8 +16,6 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <TextView

@@ -16,4 +16,5 @@
     <color name="adminLightBlue">#ADD8E6</color>
     <color name="pink">#FFC0CB</color>
     <color name="sendMessage">#006400</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

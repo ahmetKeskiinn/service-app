@@ -5,10 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
     <LinearLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:id="@+id/recyclerItemLayout"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:background="@drawable/admin_recyclerview_gradient"
         android:layout_width="match_parent"
         android:orientation="horizontal">
         <LinearLayout
@@ -16,17 +14,18 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/familyChildrenNameSurname"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1" />
             <TextView
                 android:id="@+id/familyChildrenNumber"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
