@@ -88,7 +88,7 @@ class FamilyFragment : Fragment() {
                 binding.whereBusCardView.isVisible = true
                 binding.safetyLocationCardView.isVisible = true
             },
-            1000
+            500
         )
     }
 

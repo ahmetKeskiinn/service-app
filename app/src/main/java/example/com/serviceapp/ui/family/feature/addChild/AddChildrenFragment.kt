@@ -1,12 +1,14 @@
 package example.com.serviceapp.ui.family.feature.addChild
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import example.com.serviceapp.R
@@ -16,7 +18,7 @@ import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.authenticationUtils.admin.AddChildren
 import javax.inject.Inject
 
-class AddChildrenFragment : Fragment(), AddChildren {
+class AddChildrenFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var addChildrenFragment: AddChildrenViewModel
@@ -34,7 +36,6 @@ class AddChildrenFragment : Fragment(), AddChildren {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialUI()
         initialVM()
-        addInfos()
         initalButton()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -47,9 +48,6 @@ class AddChildrenFragment : Fragment(), AddChildren {
         addChildrenFragment = ViewModelProvider(this, viewModelFactory).get(AddChildrenViewModel::class.java)
     }
 
-    private fun addInfos() {
-        // if(binding)
-    }
     private fun hideAnimationInComponents() {
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         binding.childrenNumber.startAnimation(animationFadeIn)
@@ -68,17 +66,15 @@ class AddChildrenFragment : Fragment(), AddChildren {
                     binding.childrenNumber.text.toString(),
                     binding.serviceCheckBox.isChecked,
                     null
-                ),
-                this
-            )
-        }
-    }
-
-    override fun isSuccess(boolean: Boolean) {
-        if (boolean) {
-            Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
-        } else {
-            Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
+                )
+            ).observe(viewLifecycleOwner, Observer {
+                if (it) {
+                    Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
+                } else {
+                    Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 }

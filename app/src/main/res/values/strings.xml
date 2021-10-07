@@ -13,7 +13,7 @@
     <string name="Login">Login</string>
     <string name="addChildren">Add Children</string>
     <string name="addSafetyLcation">Safety Location</string>
-    <string name="schoolNumber">SchoolNumber</string>
+    <string name="schoolNumber">School Number</string>
     <string name="childrenName">Children Name</string>
     <string name="add">Add</string>
     <string name="service">He/She will use service</string>
@@ -31,4 +31,5 @@
     <string name="addNewStudentSub">New Student</string>
     <string name="welcomeParent">Welcome Parent</string>
     <string name="nameSurname">Name Surname</string>
+    <string name="requestToast">A request has been sent to the teacher for student registration!</string>
 </resources>
