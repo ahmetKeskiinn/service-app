@@ -32,4 +32,8 @@
     <string name="welcomeParent">Welcome Parent</string>
     <string name="nameSurname">Name Surname</string>
     <string name="requestToast">A request has been sent to the teacher for student registration!</string>
+    <string name="serviceMoving">Service in motion</string>
+    <string name="attitude">Attitude: </string>
+    <string name="latitude">Latitude: </string>
+    <string name="touchToOpen">Touch to open</string>
 </resources>

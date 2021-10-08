@@ -1,6 +1,7 @@
 package example.com.mapproject.di
 
 import dagger.Component
+import example.com.serviceapp.di.AndroidServiceModule
 import example.com.serviceapp.di.AppModule
 import example.com.serviceapp.di.FactoryModule
 import example.com.serviceapp.di.FireBaseModule
@@ -21,6 +22,7 @@ import example.com.serviceapp.ui.service.ServiceModule
 import example.com.serviceapp.ui.service.feature.MainServiceFragment
 import example.com.serviceapp.ui.teacher.TeacherModule
 import example.com.serviceapp.ui.teacher.feature.MainAdminFragment
+import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Singleton
 
 @Singleton
@@ -37,7 +39,8 @@ import javax.inject.Singleton
         ChatModule::class,
         FireBaseModule::class,
         SharedPrefModule::class,
-        SplashScreenModule::class
+        SplashScreenModule::class,
+        AndroidServiceModule::class
     ]
 )
 interface AppComponent {
@@ -49,4 +52,5 @@ interface AppComponent {
     fun inject(chatServiceFragment: ChatFragment)
     fun inject(mainServiceFragment: MainServiceFragment)
     fun inject(mainAdminFragment: MainAdminFragment)
+    fun inject(foregroundService: ForegroundService)
 }

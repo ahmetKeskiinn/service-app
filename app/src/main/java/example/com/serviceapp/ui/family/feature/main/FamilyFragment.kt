@@ -1,5 +1,6 @@
 package example.com.serviceapp.ui.family.feature.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -12,16 +13,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentFamilyBinding
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.adapters.FamilyRecylerAdapter
+import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Inject
 
 class FamilyFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var androidService: ForegroundService
+    @Inject
+    lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var familyViewModel: FamilyViewModel
     private lateinit var binding: FragmentFamilyBinding
     private lateinit var recyclerAdapter: FamilyRecylerAdapter
@@ -42,8 +50,10 @@ class FamilyFragment : Fragment() {
         initialTextViews()
         initialRecycler()
         getData()
+        startService()
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun setAnimationInComponents() {
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_components)
         val animSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
@@ -56,6 +66,7 @@ class FamilyFragment : Fragment() {
         binding.topImagView.startAnimation(animationFadeIn)
         binding.topTw.startAnimation(animationFadeIn)
     }
+
     private fun listOfStudentButtonClicked() {
         val animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_recycler)
@@ -119,6 +130,7 @@ class FamilyFragment : Fragment() {
             binding.listOfStudentCardView.isClickable = true
         }
     }
+
     private fun initialRecycler() {
         recyclerAdapter = FamilyRecylerAdapter()
         binding.childrenRecycler.apply {
@@ -127,6 +139,7 @@ class FamilyFragment : Fragment() {
             adapter = recyclerAdapter
         }
     }
+
     private fun getData() {
         familyViewModel.getChildList().observe(
             viewLifecycleOwner,
@@ -135,5 +148,17 @@ class FamilyFragment : Fragment() {
                 recyclerAdapter.submitList(it)
             }
         )
+    }
+
+    private fun startService() {
+        val service = ForegroundService()
+        val intentStop = Intent(activity, service::class.java)
+        requireActivity().startService(Intent(intentStop))
+    }
+
+    private fun stopService() {
+        val intentStop = Intent(activity, ForegroundService::class.java)
+        intentStop.action = ACTION_STOP_FOREGROUND
+        requireActivity().startService(intentStop)
     }
 }

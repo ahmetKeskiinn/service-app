@@ -12,12 +12,14 @@ import example.com.serviceapp.utils.nameSurname
 import example.com.serviceapp.utils.parentName
 import example.com.serviceapp.utils.schoolNumber
 import example.com.serviceapp.utils.service
+import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Inject
 
 class FamilyViewModel @Inject constructor(
     val fireBase: FirebaseAuth,
     val firebaseDatabase: FirebaseDatabase,
-    val sharedPreferences: SharedPreferences
+    val sharedPreferences: SharedPreferences,
+    val androidService: ForegroundService
 ) : ViewModel() {
     companion object {
     }
@@ -42,7 +44,6 @@ class FamilyViewModel @Inject constructor(
             returnData.value = childrenList
         }.addOnFailureListener {
         }
-
         return returnData
     }
 }
