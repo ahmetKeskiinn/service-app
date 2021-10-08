@@ -1,25 +1,41 @@
 package example.com.serviceapp.ui.service.feature
 
+import android.Manifest
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import example.com.serviceapp.databinding.FragmentMainServiceBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.adapters.ServiceAdapter
+import example.com.serviceapp.utils.services.BackgroundService
 import javax.inject.Inject
 
-class MainServiceFragment : Fragment() {
+class MainServiceFragment : Fragment(), PermissionListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var androidService: BackgroundService
     private lateinit var mainServiceViewModel: MainServiceViewModel
     private lateinit var binding: FragmentMainServiceBinding
     private lateinit var recyclerAdapter: ServiceAdapter
+    private val locationPermission = ACCESS_FINE_LOCATION
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +48,7 @@ class MainServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialUI()
+        permissionCheck()
         initialVM()
         initialRecycler()
         getData()
@@ -60,5 +77,63 @@ class MainServiceFragment : Fragment() {
                 recyclerAdapter.submitList(it)
             }
         )
+    }
+    companion object {
+        private const val REQUEST_LOCATION_PERMISSION = 1
+    }
+    private fun requestLocationPermission() {
+        startService()
+        // optional implementation of shouldShowRequestPermissionRationale
+       /* if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), locationPermission)) {
+            Log.d("TAG", "requestLocationPermission: ")
+            context?.let {
+                AlertDialog.Builder(it)
+                        .setMessage("Need location permission to get current place")
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                            startService()
+                            // ActivityCompat.requestPermissions(activity!!, locationPermissions, REQUEST_LOCATION_PERMISSION)
+                            requestPermissions(arrayOf(locationPermission), REQUEST_LOCATION_PERMISSION)
+                        }
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show()
+            }
+        }
+        else {
+            requestPermissions(arrayOf(locationPermission), REQUEST_LOCATION_PERMISSION)
+        }*/
+    }
+    private fun permissionCheck() {
+        if (isPermissionGiven()) {
+            startService()
+        } else {
+            givePermission()
+        }
+    }
+    private fun givePermission() {
+        Dexter.withActivity(activity)
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(this)
+            .check()
+    }
+
+    private fun isPermissionGiven(): Boolean {
+        return ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun startService() {
+        val intent = Intent(this.context?.applicationContext, androidService::class.java)
+        requireActivity().startService(intent)
+    }
+
+    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+        startService()
+    }
+
+    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+        Toast.makeText(context, "Permission required for showing location", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+        token!!.continuePermissionRequest()
     }
 }

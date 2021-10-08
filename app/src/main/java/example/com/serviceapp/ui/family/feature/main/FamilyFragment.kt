@@ -151,8 +151,7 @@ class FamilyFragment : Fragment() {
     }
 
     private fun startService() {
-        val service = ForegroundService()
-        val intentStop = Intent(activity, service::class.java)
+        val intentStop = Intent(activity, androidService::class.java)
         requireActivity().startService(Intent(intentStop))
     }
 

@@ -11,6 +11,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -19,10 +20,14 @@ import example.com.serviceapp.R
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.MainActivity
 import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
+import example.com.serviceapp.utils.altitude
+import example.com.serviceapp.utils.latitude
 import example.com.serviceapp.utils.serviceLocation
 import javax.inject.Inject
 
 class ForegroundService : Service() {
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
     @Inject
     lateinit var firebaseDatabase: FirebaseDatabase
 
@@ -32,14 +37,19 @@ class ForegroundService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         MyApp.appComponent.inject(this)
-        if (
-            intent?.action != null &&
-            intent.action.equals(ACTION_STOP_FOREGROUND, ignoreCase = true)
-        ) {
-            stopForeground(true)
-            stopSelf()
+        mHandler = Handler()
+        mRunnable = Runnable {
+            if (
+                intent?.action != null &&
+                intent.action.equals(ACTION_STOP_FOREGROUND, ignoreCase = true)
+            ) {
+                stopForeground(true)
+                stopSelf()
+            }
+            checkLocation()
         }
-        checkLocation()
+        mHandler.postDelayed(mRunnable, 5000)
+
         return START_STICKY
     }
     private fun checkLocation() {
@@ -49,8 +59,8 @@ class ForegroundService : Service() {
                 if (!child.getValue().toString().isEmpty() && !child.getValue().toString().equals("null")
                 ) {
                     generateForegroundNotification(
-                        "123",
-                        "231312"
+                        child.child(latitude).getValue().toString(),
+                        child.child(altitude).getValue().toString()
                     )
                 } else {
                     Log.d("TAG", "checkLocation:----- ")
@@ -58,6 +68,7 @@ class ForegroundService : Service() {
             }
         }.addOnFailureListener {
         }
+        mHandler.postDelayed(mRunnable, 5000)
     }
 
     private var iconNotification: Bitmap? = null
@@ -114,5 +125,6 @@ class ForegroundService : Service() {
             notification = builder.build()
             startForeground(mNotificationId, notification)
         }
+        mHandler.postDelayed(mRunnable, 5000)
     }
 }

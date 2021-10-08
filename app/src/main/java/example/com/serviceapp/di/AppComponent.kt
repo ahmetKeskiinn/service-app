@@ -22,6 +22,7 @@ import example.com.serviceapp.ui.service.ServiceModule
 import example.com.serviceapp.ui.service.feature.MainServiceFragment
 import example.com.serviceapp.ui.teacher.TeacherModule
 import example.com.serviceapp.ui.teacher.feature.MainAdminFragment
+import example.com.serviceapp.utils.services.BackgroundService
 import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Singleton
 
@@ -53,4 +54,5 @@ interface AppComponent {
     fun inject(mainServiceFragment: MainServiceFragment)
     fun inject(mainAdminFragment: MainAdminFragment)
     fun inject(foregroundService: ForegroundService)
+    fun inject(backgroundService: BackgroundService)
 }
