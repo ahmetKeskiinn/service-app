@@ -22,6 +22,9 @@
         </activity>
         <service android:name=".utils.services.ForegroundService"/>
         <service android:name=".utils.services.BackgroundService"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCiSh4VnnI1jemtZTytDoj2X7Wl6evey30" />
     </application>
 
 </manifest>

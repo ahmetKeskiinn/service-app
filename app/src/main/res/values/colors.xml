@@ -17,4 +17,18 @@
     <color name="pink">#FFC0CB</color>
     <color name="sendMessage">#006400</color>
     <color name="transparent">#00FFFFFF</color>
+
+    <color name="busCardViewColor">#ffe295</color>
+    <color name="busCardIconBorder">#f1bf28</color>
+    <color name="chatCardViewColor">#ca91ff</color>
+    <color name="chatCardIconBorder">#a10bf6</color>
+    <color name="locationCardViewColor">#7e88ff</color>
+    <color name="locationCardIconBorder">#0975f4</color>
+    <color name="newStudentCardViewColor">#fe8a8a</color>
+    <color name="newStudentCardIconBorder">#f74a10</color>
+    <color name="listStudentCardViewColor">#9db4fa</color>
+    <color name="listStudentCardIconBorder">#2fa6f7</color>
+    <color name="familyGardientBottom">#ea54a7</color>
+    <color name="familyGardientTop">#ec3668</color>
+
 </resources>

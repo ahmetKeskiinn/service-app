@@ -1,12 +1,16 @@
 package example.com.serviceapp.ui.family.feature.main
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -51,7 +55,32 @@ class FamilyFragment : Fragment() {
         initialRecycler()
         getData()
         startService()
+        getIconList()
         super.onViewCreated(view, savedInstanceState)
+    }
+    private fun getIconList(){
+        val imageList= ArrayList<ImageView>()
+        val colorList = ArrayList<Int>()
+        imageList.add(binding.icBusImage)
+        imageList.add(binding.icChatImage)
+        imageList.add(binding.icLocationImage)
+        imageList.add(binding.icAddChildrenImage)
+        imageList.add(binding.icListStudentImage)
+        colorList.add(R.color.busCardIconBorder)
+        colorList.add(R.color.chatCardIconBorder)
+        colorList.add(R.color.locationCardIconBorder)
+        colorList.add(R.color.newStudentCardIconBorder)
+        colorList.add(R.color.listStudentCardIconBorder)
+        changeIconColor(imageList, colorList)
+    }
+    private fun changeIconColor(icons:ArrayList<ImageView>, colors:ArrayList<Int>){
+        for (i in 0..icons.size-1){
+            context?.let { ContextCompat.getColor(it, colors.get(i)) }?.let {
+                icons.get(i).setColorFilter(
+                    it,
+                    PorterDuff.Mode.MULTIPLY)
+            }
+        }
     }
 
     private fun setAnimationInComponents() {

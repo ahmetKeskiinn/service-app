@@ -3,7 +3,7 @@
     <style name="Theme.ServiceApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/buttonColor</item>
-        <item name="colorPrimaryVariant">@color/buttonColor</item>
+        <item name="colorPrimaryVariant">@color/familyGardientTop</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/buttonColor</item>
