@@ -32,12 +32,6 @@ class BackgroundService : Service() {
         return START_STICKY
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Toast.makeText(applicationContext, "Service destroyed.", Toast.LENGTH_SHORT).show()
-        mHandler.removeCallbacks(mRunnable)
-    }
-
     @SuppressLint("MissingPermission")
     private fun obtieneLocalizacion() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
