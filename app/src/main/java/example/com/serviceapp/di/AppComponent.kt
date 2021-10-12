@@ -16,7 +16,7 @@ import example.com.serviceapp.ui.chat.ChatModule
 import example.com.serviceapp.ui.family.FamilyModule
 import example.com.serviceapp.ui.family.feature.addChild.AddChildrenFragment
 import example.com.serviceapp.ui.family.feature.main.FamilyFragment
-import example.com.serviceapp.ui.family.feature.safetyLocation.SelectSafetyLocationFragment
+import example.com.serviceapp.ui.family.feature.safetyLocation.MapsFragment
 import example.com.serviceapp.ui.login.LoginFragment
 import example.com.serviceapp.ui.service.ServiceModule
 import example.com.serviceapp.ui.service.feature.MainServiceFragment
@@ -49,10 +49,10 @@ interface AppComponent {
     fun inject(loginFragment: LoginFragment)
     fun inject(addChildrenFragment: AddChildrenFragment)
     fun inject(familyFragment: FamilyFragment)
-    fun inject(selectSafetyLocationFragment: SelectSafetyLocationFragment)
     fun inject(chatServiceFragment: ChatFragment)
     fun inject(mainServiceFragment: MainServiceFragment)
     fun inject(mainAdminFragment: MainAdminFragment)
+    fun inject(mapsFragment: MapsFragment)
     fun inject(foregroundService: ForegroundService)
     fun inject(backgroundService: BackgroundService)
 }

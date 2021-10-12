@@ -37,7 +37,6 @@ class LoginFragment : Fragment() {
         setAnimationInComponents()
         initialUI()
         initialVM()
-        initialButton()
         detectMail()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -57,19 +56,15 @@ class LoginFragment : Fragment() {
         binding.schoolBusImage.startAnimation(animationFadeIn)
     }
 
-    private fun initialButton() {
-        binding.sign.setOnClickListener {
-            if (binding.rememberMe.isChecked) {
-                loginViewModel.saveInfos(binding.id.text.toString(), binding.pw.text.toString())
-            }
-        }
-    }
     private fun detectMail() {
         binding.pw.setOnClickListener {
             wrongMail()
         }
         binding.sign.setOnClickListener {
             wrongMail()
+            if (binding.rememberMe.isChecked) {
+                loginViewModel.saveInfos(binding.id.text.toString(), binding.pw.text.toString())
+            }
             firebaseAuth()
         }
         binding.rememberMe.setOnClickListener {

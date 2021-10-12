@@ -15,15 +15,13 @@
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out"/>
         <action
-            android:id="@+id/action_mapFragment_to_selectSafetyLocationFragment"
-            app:destination="@id/selectSafetyLocationFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"/>
-        <action
             android:id="@+id/action_mapFragment_to_chatServiceFragment"
             app:destination="@id/chatServiceFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_mapFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addChildrenFragment"
@@ -34,17 +32,6 @@
             android:id="@+id/action_addChildrenFragment_to_mapFragment"
             app:destination="@id/mapFragment"
             app:enterAnim="@anim/slide_in" />
-    </fragment>
-    <fragment
-        android:id="@+id/selectSafetyLocationFragment"
-        android:name="example.com.serviceapp.ui.family.feature.safetyLocation.SelectSafetyLocationFragment"
-        android:label="fragment_select_safety_location"
-        tools:layout="@layout/fragment_select_safety_location" >
-        <action
-            android:id="@+id/action_selectSafetyLocationFragment_to_mapFragment"
-            app:destination="@id/mapFragment"
-            app:enterAnim="@anim/slide_out"
-            app:exitAnim="@anim/slide_in"/>
     </fragment>
     <fragment
         android:id="@+id/mainAdminFragment"
@@ -122,5 +109,14 @@
             app:destination="@id/mainServiceFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="example.com.serviceapp.ui.family.feature.safetyLocation.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 </navigation>
