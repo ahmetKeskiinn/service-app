@@ -20,8 +20,8 @@ import example.com.serviceapp.R
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.MainActivity
 import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
-import example.com.serviceapp.utils.altitude
 import example.com.serviceapp.utils.latitude
+import example.com.serviceapp.utils.longtitude
 import example.com.serviceapp.utils.serviceLocation
 import javax.inject.Inject
 
@@ -60,7 +60,7 @@ class ForegroundService : Service() {
                 ) {
                     generateForegroundNotification(
                         child.child(latitude).getValue().toString(),
-                        child.child(altitude).getValue().toString()
+                        child.child(longtitude).getValue().toString()
                     )
                 } else {
                     Log.d("TAG", "checkLocation:----- ")
@@ -76,7 +76,7 @@ class ForegroundService : Service() {
     var mNotificationManager: NotificationManager? = null
     private val mNotificationId = 123
 
-    private fun generateForegroundNotification(latitude: String, attitude: String) {
+    private fun generateForegroundNotification(latitude: String, longtitude: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intentMainLanding = Intent(this, MainActivity::class.java)
             val pendingIntent =
@@ -106,12 +106,18 @@ class ForegroundService : Service() {
             val builder = NotificationCompat.Builder(this, "service_channel")
 
             builder.setContentTitle(
-                StringBuilder(resources.getString(R.string.serviceMoving))
-                    .append("\n").append(resources.getString(R.string.latitude)).append(latitude)
-                    .append("\n").append(resources.getString(R.string.attitude)).append(attitude).toString()
+                StringBuilder(
+                    resources.getString(R.string.serviceMoving)
+                )
             )
                 .setTicker(StringBuilder(resources.getString(R.string.app_name)).append("service is running").toString())
-                .setContentText(resources.getString(R.string.touchToOpen))
+                .setContentText(
+                    getString(R.string.latitude) +
+                        latitude + "\n" +
+                        getString(R.string.longtitude) +
+                        longtitude + "\n" +
+                        getString(R.string.touchToOpen)
+                )
                 .setSmallIcon(R.drawable.ic_location)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setWhen(0)

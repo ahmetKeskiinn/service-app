@@ -22,5 +22,6 @@ const val service = "service"
 const val family = "family"
 const val admin = "admin"
 const val serviceLocation = "serviceLocation"
-const val altitude = "altitude"
 const val latitude = "latitude"
+const val longtitude = "longtitude"
+const val zoomCount = 18.0f

@@ -1,6 +1,5 @@
 package example.com.serviceapp.ui.service.feature
 
-import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,7 +34,6 @@ class MainServiceFragment : Fragment(), PermissionListener {
     private lateinit var mainServiceViewModel: MainServiceViewModel
     private lateinit var binding: FragmentMainServiceBinding
     private lateinit var recyclerAdapter: ServiceAdapter
-    private val locationPermission = ACCESS_FINE_LOCATION
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,30 +76,7 @@ class MainServiceFragment : Fragment(), PermissionListener {
             }
         )
     }
-    companion object {
-        private const val REQUEST_LOCATION_PERMISSION = 1
-    }
-    private fun requestLocationPermission() {
-        startService()
-        // optional implementation of shouldShowRequestPermissionRationale
-       /* if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), locationPermission)) {
-            Log.d("TAG", "requestLocationPermission: ")
-            context?.let {
-                AlertDialog.Builder(it)
-                        .setMessage("Need location permission to get current place")
-                        .setPositiveButton(android.R.string.ok) { _, _ ->
-                            startService()
-                            // ActivityCompat.requestPermissions(activity!!, locationPermissions, REQUEST_LOCATION_PERMISSION)
-                            requestPermissions(arrayOf(locationPermission), REQUEST_LOCATION_PERMISSION)
-                        }
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .show()
-            }
-        }
-        else {
-            requestPermissions(arrayOf(locationPermission), REQUEST_LOCATION_PERMISSION)
-        }*/
-    }
+
     private fun permissionCheck() {
         if (isPermissionGiven()) {
             startService()
@@ -111,13 +86,13 @@ class MainServiceFragment : Fragment(), PermissionListener {
     }
     private fun givePermission() {
         Dexter.withActivity(activity)
-            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withPermission(ACCESS_FINE_LOCATION)
             .withListener(this)
             .check()
     }
 
     private fun isPermissionGiven(): Boolean {
-        return ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this.requireContext(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun startService() {

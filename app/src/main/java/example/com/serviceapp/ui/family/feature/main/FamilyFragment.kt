@@ -145,7 +145,6 @@ class FamilyFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_addChildrenFragment)
         }
         binding.safetyLocationCardView.setOnClickListener {
-            //Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_selectSafetyLocationFragment)
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_mapsFragment)
         }
         binding.chatCardView.setOnClickListener {
