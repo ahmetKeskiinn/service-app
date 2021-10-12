@@ -39,11 +39,14 @@ class LoginFragment : Fragment() {
         initialUI()
         initialVM()
         initialButton()
+        detectMail()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initialUI() {
         MyApp.appComponent.inject(this)
+        binding.id.setBackgroundResource(R.drawable.send_text_corner)
+        binding.pw.setBackgroundResource(R.drawable.send_text_corner)
     }
 
     private fun initialVM() {
@@ -63,6 +66,28 @@ class LoginFragment : Fragment() {
             firebaseAuth()
         }
     }
+    private fun detectMail() {
+
+        binding.pw.setOnClickListener {
+            wrongMail()
+        }
+        binding.sign.setOnClickListener {
+            wrongMail()
+        }
+        binding.rememberMe.setOnClickListener {
+            wrongMail()
+        }
+    }
+    private fun wrongMail() {
+        if (!binding.id.text.toString().contains("@")) {
+            Log.d("TAG", "wrongMail:111 ")
+            binding.id.setBackgroundResource(R.drawable.send_wrong_text)
+        } else {
+            Log.d("TAG", "wrongMail: ")
+            binding.id.setBackgroundResource(R.drawable.send_text_corner)
+        }
+    }
+
     private fun firebaseAuth() {
         loginViewModel.firebaseAuth(
             binding.id.text.toString(),

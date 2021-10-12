@@ -1,7 +1,6 @@
 package example.com.serviceapp.ui.family.feature.main
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
@@ -58,8 +57,8 @@ class FamilyFragment : Fragment() {
         getIconList()
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun getIconList(){
-        val imageList= ArrayList<ImageView>()
+    private fun getIconList() {
+        val imageList = ArrayList<ImageView>()
         val colorList = ArrayList<Int>()
         imageList.add(binding.icBusImage)
         imageList.add(binding.icChatImage)
@@ -73,12 +72,13 @@ class FamilyFragment : Fragment() {
         colorList.add(R.color.listStudentCardIconBorder)
         changeIconColor(imageList, colorList)
     }
-    private fun changeIconColor(icons:ArrayList<ImageView>, colors:ArrayList<Int>){
-        for (i in 0..icons.size-1){
+    private fun changeIconColor(icons: ArrayList<ImageView>, colors: ArrayList<Int>) {
+        for (i in 0..icons.size - 1) {
             context?.let { ContextCompat.getColor(it, colors.get(i)) }?.let {
                 icons.get(i).setColorFilter(
                     it,
-                    PorterDuff.Mode.MULTIPLY)
+                    PorterDuff.Mode.MULTIPLY
+                )
             }
         }
     }
