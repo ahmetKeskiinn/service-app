@@ -1,7 +1,6 @@
 package example.com.serviceapp.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,16 +62,15 @@ class LoginFragment : Fragment() {
             if (binding.rememberMe.isChecked) {
                 loginViewModel.saveInfos(binding.id.text.toString(), binding.pw.text.toString())
             }
-            firebaseAuth()
         }
     }
     private fun detectMail() {
-
         binding.pw.setOnClickListener {
             wrongMail()
         }
         binding.sign.setOnClickListener {
             wrongMail()
+            firebaseAuth()
         }
         binding.rememberMe.setOnClickListener {
             wrongMail()
@@ -80,10 +78,8 @@ class LoginFragment : Fragment() {
     }
     private fun wrongMail() {
         if (!binding.id.text.toString().contains("@")) {
-            Log.d("TAG", "wrongMail:111 ")
             binding.id.setBackgroundResource(R.drawable.send_wrong_text)
         } else {
-            Log.d("TAG", "wrongMail: ")
             binding.id.setBackgroundResource(R.drawable.send_text_corner)
         }
     }
@@ -97,7 +93,6 @@ class LoginFragment : Fragment() {
             Observer
             {
                 if (it) {
-                    Log.d("TAG", "firebaseAuth: " + it)
                     getStatus()
                 } else {
                     Toast.makeText(context, R.string.invalidateAuthetication, Toast.LENGTH_SHORT).show()
@@ -111,7 +106,6 @@ class LoginFragment : Fragment() {
             viewLifecycleOwner,
             Observer
             {
-                Log.d("TAG", "getStatus: " + it)
                 if (it.equals(family)) {
                     Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_mapFragment)
                 } else if (it.equals(service)) {

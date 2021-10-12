@@ -77,9 +77,10 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:$room_version"
+
     //kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:2.2.5"
-
+    //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
@@ -87,10 +88,15 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //location
     implementation "com.karumi:dexter:5.0.0"
     implementation 'com.google.android.gms:play-services-location:15.0.1'
 
+    //google location service
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
+    //google material
+    implementation 'com.google.android.material:material:1.4.0'
 }
