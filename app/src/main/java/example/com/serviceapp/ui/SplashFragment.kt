@@ -12,7 +12,11 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.utils.*
+import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.admin
+import example.com.serviceapp.utils.animationHideDelay
+import example.com.serviceapp.utils.family
+import example.com.serviceapp.utils.service
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 

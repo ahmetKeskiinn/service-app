@@ -41,5 +41,6 @@
     <string name="touchToOpen">Touch to open</string>
     <string name="yourHere">You Are Here!</string>
     <string name="longtitude">Longtitude: </string>
+    <string name="close">Kapat</string>
 
 </resources>

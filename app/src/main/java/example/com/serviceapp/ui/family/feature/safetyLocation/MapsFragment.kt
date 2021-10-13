@@ -2,7 +2,6 @@ package example.com.serviceapp.ui.family.feature.safetyLocation
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -74,7 +73,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     }
 
     private fun isPermissionGiven(): Boolean {
-        return ActivityCompat.checkSelfPermission(this.requireContext(),
+        return ActivityCompat.checkSelfPermission(
+            this.requireContext(),
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
