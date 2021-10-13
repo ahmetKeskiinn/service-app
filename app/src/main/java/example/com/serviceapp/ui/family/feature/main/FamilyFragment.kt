@@ -23,6 +23,8 @@ import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.adapters.FamilyRecylerAdapter
+import example.com.serviceapp.utils.animationHideDelay
+import example.com.serviceapp.utils.animationStartDelay
 import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Inject
 
@@ -110,7 +112,7 @@ class FamilyFragment : Fragment() {
                 binding.childrenCardView.startAnimation(animationSlideIn)
                 binding.childrenCardView.isVisible = true
             },
-            1000
+            animationStartDelay
         )
     }
 
@@ -128,7 +130,7 @@ class FamilyFragment : Fragment() {
                 binding.whereBusCardView.isVisible = true
                 binding.safetyLocationCardView.isVisible = true
             },
-            500
+            animationHideDelay
         )
     }
 

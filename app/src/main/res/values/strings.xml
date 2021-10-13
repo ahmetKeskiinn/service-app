@@ -16,6 +16,7 @@
     <string name="schoolNumber">School Number</string>
     <string name="childrenName">Children Name</string>
     <string name="add">Add</string>
+    <string name="addLocation">Add Location</string>
     <string name="service">He/She will use service</string>
     <string name="chatButton">Chat</string>
     <string name="invalidateAuthetication">Authentication Error! Please Check Your E-Mail and Password!</string>
@@ -31,6 +32,8 @@
     <string name="addNewStudentSub">New Student</string>
     <string name="welcomeParent">Welcome Parent</string>
     <string name="nameSurname">Name Surname</string>
+    <string name="locationName">Location Name</string>
+    <string name="selectLocation">Select Safety Location</string>
     <string name="requestToast">A request has been sent to the teacher for student registration!</string>
     <string name="serviceMoving">Service in motion</string>
     <string name="attitude">Attitude: </string>
@@ -38,4 +41,5 @@
     <string name="touchToOpen">Touch to open</string>
     <string name="yourHere">You Are Here!</string>
     <string name="longtitude">Longtitude: </string>
+
 </resources>

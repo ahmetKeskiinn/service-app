@@ -12,10 +12,7 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentSplashBinding
 import example.com.serviceapp.di.MyApp
-import example.com.serviceapp.utils.ViewModelFactory
-import example.com.serviceapp.utils.admin
-import example.com.serviceapp.utils.family
-import example.com.serviceapp.utils.service
+import example.com.serviceapp.utils.*
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -36,7 +33,7 @@ class SplashFragment : Fragment() {
     override fun onStart() {
         initialVM()
         startAnimation()
-        Handler().postDelayed({ this.goActivity() }, 500)
+        Handler().postDelayed({ this.goActivity() }, animationHideDelay)
         super.onStart()
     }
     private fun initialVM() {

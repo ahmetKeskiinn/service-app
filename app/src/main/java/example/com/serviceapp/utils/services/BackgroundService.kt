@@ -11,6 +11,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.utils.backgroundDelay
 import example.com.serviceapp.utils.serviceLocation
 import javax.inject.Inject
 
@@ -28,7 +29,7 @@ class BackgroundService : Service() {
         MyApp.appComponent.inject(this)
         mHandler = Handler()
         mRunnable = Runnable { obtieneLocalizacion() }
-        mHandler.postDelayed(mRunnable, 5000)
+        mHandler.postDelayed(mRunnable, backgroundDelay)
         return START_STICKY
     }
 
@@ -42,6 +43,6 @@ class BackgroundService : Service() {
                     Toast.makeText(applicationContext, "Lokasyon kaydedildi!", Toast.LENGTH_SHORT).show()
                 }
             }
-        mHandler.postDelayed(mRunnable, 5000)
+        mHandler.postDelayed(mRunnable, backgroundDelay)
     }
 }

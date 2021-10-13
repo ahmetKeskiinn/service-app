@@ -20,6 +20,7 @@ import example.com.serviceapp.R
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.MainActivity
 import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
+import example.com.serviceapp.utils.backgroundDelay
 import example.com.serviceapp.utils.latitude
 import example.com.serviceapp.utils.longtitude
 import example.com.serviceapp.utils.serviceLocation
@@ -48,7 +49,7 @@ class ForegroundService : Service() {
             }
             checkLocation()
         }
-        mHandler.postDelayed(mRunnable, 5000)
+        mHandler.postDelayed(mRunnable, backgroundDelay)
 
         return START_STICKY
     }
@@ -68,7 +69,7 @@ class ForegroundService : Service() {
             }
         }.addOnFailureListener {
         }
-        mHandler.postDelayed(mRunnable, 5000)
+        mHandler.postDelayed(mRunnable, backgroundDelay)
     }
 
     private var iconNotification: Bitmap? = null
@@ -131,6 +132,6 @@ class ForegroundService : Service() {
             notification = builder.build()
             startForeground(mNotificationId, notification)
         }
-        mHandler.postDelayed(mRunnable, 5000)
+        mHandler.postDelayed(mRunnable, backgroundDelay)
     }
 }

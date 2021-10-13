@@ -25,3 +25,6 @@ const val serviceLocation = "serviceLocation"
 const val latitude = "latitude"
 const val longtitude = "longtitude"
 const val zoomCount = 18.0f
+const val animationStartDelay: Long = 1000
+const val animationHideDelay: Long = 500
+const val backgroundDelay: Long = 5000
