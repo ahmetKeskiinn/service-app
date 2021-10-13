@@ -560,15 +560,6 @@
             android:visibility="gone"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/childrenRecycler"
-                android:layout_width="411dp"
-                android:layout_height="109dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/family_recyclerview_item" />
-
             <ImageView
                 android:id="@+id/familyChildrenCloseButton"
                 android:layout_width="wrap_content"

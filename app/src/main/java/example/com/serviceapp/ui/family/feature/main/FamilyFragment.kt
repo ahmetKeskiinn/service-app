@@ -23,6 +23,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -77,8 +78,6 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         initialUI()
         initialVM()
         initialTextViews()
-        initialRecycler()
-        getData()
         startService()
         getIconList()
         super.onViewCreated(view, savedInstanceState)
@@ -199,8 +198,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_chatServiceFragment)
         }
         binding.listOfStudentCardView.setOnClickListener {
-            listOfStudentButtonClicked()
-            binding.listOfStudentCardView.isClickable = false
+            initialListOfStudent()
         }
         binding.familyChildrenCloseButton.setOnClickListener {
             hideListOfButton()
@@ -208,15 +206,34 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         }
     }
 
-    private fun initialRecycler() {
-        recyclerAdapter = FamilyRecylerAdapter()
-        binding.childrenRecycler.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            setHasFixedSize(true)
-            adapter = recyclerAdapter
+    private fun initialListOfStudent() {
+        val view = layoutInflater.inflate(R.layout.list_of_student_dialog, null)
+        val dialog = context?.let { it1 -> BottomSheetDialog(it1) }
+        val closeButton = view.findViewById<ImageView>(R.id.dissmissList)
+        val recycler = view.findViewById<RecyclerView>(R.id.childrenRecyclerDialog)
+        closeButton.setOnClickListener {
+            if (dialog != null) {
+                (view.getParent() as ViewGroup).removeView(view) // <- fix
+                dialog.dismiss()
+            }
+        }
+        if (dialog != null) {
+            dialog.setCancelable(false)
+        }
+        if (dialog != null) {
+            recyclerAdapter = FamilyRecylerAdapter()
+            recycler.apply {
+                layoutManager = LinearLayoutManager(this.context)
+                setHasFixedSize(true)
+                adapter = recyclerAdapter
+            }
+            getData()
+            dialog.setContentView(view)
+        }
+        if (dialog != null) {
+            dialog.show()
         }
     }
-
     private fun getData() {
         familyViewModel.getChildList().observe(
             viewLifecycleOwner,
