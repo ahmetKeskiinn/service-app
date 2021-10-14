@@ -11,23 +11,23 @@ import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.main.LayoutModel
 
-class LayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<LayoutModel, LayoutAdapter.LayoutListHolder>(
+class GridLayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<LayoutModel, GridLayoutAdapter.GirdLayoutListHolder>(
     diffCallback
 ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LayoutListHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GirdLayoutListHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.layout_list_item,
+            R.layout.layout_grid_item,
             parent,
             false
         )
-        return LayoutListHolder(itemView)
+        return GirdLayoutListHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: LayoutListHolder, position: Int) {
+    override fun onBindViewHolder(holder: GirdLayoutListHolder, position: Int) {
         with(getItem(position)) {
             holder.bottomIcon.setBackgroundResource(this.bottomIcon)
-            holder.leftBackground.setBackgroundResource(this.leftXml)
+            holder.topBackground.setBackgroundResource(this.leftXml)
             holder.title.text = this.title
             holder.subTitle.text = this.subTitle
             holder.exteriorIcon.setBackgroundResource(this.exteriorIcon)
@@ -35,14 +35,14 @@ class LayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<Lay
             holder.midIcon.setBackgroundResource(this.midIcon)
         }
     }
-    inner class LayoutListHolder(iv: View) : RecyclerView.ViewHolder(iv), View.OnClickListener {
-        val leftBackground: ImageView = itemView.findViewById(R.id.imageView17)
-        val title: TextView = itemView.findViewById(R.id.textView8)
-        val subTitle: TextView = itemView.findViewById(R.id.textView9)
-        val exteriorIcon: ImageView = itemView.findViewById(R.id.imageView8)
-        val interiorIcon: ImageView = itemView.findViewById(R.id.imageView12)
-        val bottomIcon: ImageView = itemView.findViewById(R.id.imageView18)
-        val midIcon: ImageView = itemView.findViewById(R.id.icBusImage)
+    inner class GirdLayoutListHolder(iv: View) : RecyclerView.ViewHolder(iv), View.OnClickListener {
+        val topBackground: ImageView = itemView.findViewById(R.id.imageView22)
+        val title: TextView = itemView.findViewById(R.id.textView7)
+        val subTitle: TextView = itemView.findViewById(R.id.textView6)
+        val exteriorIcon: ImageView = itemView.findViewById(R.id.imageView7)
+        val interiorIcon: ImageView = itemView.findViewById(R.id.imageView14)
+        val bottomIcon: ImageView = itemView.findViewById(R.id.imageView24)
+        val midIcon: ImageView = itemView.findViewById(R.id.icAddChildrenImage)
 
         init {
             itemView.setOnClickListener(this)
