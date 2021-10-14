@@ -46,13 +46,15 @@ import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.ui.MainActivity.Companion.ACTION_STOP_FOREGROUND
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.adapters.FamilyRecylerAdapter
+import example.com.serviceapp.utils.adapters.LayoutAdapter
+import example.com.serviceapp.utils.adapters.LayoutClickListener
 import example.com.serviceapp.utils.animationHideDelay
 import example.com.serviceapp.utils.animationStartDelay
 import example.com.serviceapp.utils.services.ForegroundService
 import example.com.serviceapp.utils.zoomCount
 import javax.inject.Inject
 
-class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
+class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, LayoutClickListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
@@ -62,7 +64,9 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     private lateinit var familyViewModel: FamilyViewModel
     private lateinit var binding: FragmentFamilyBinding
     private lateinit var recyclerAdapter: FamilyRecylerAdapter
+    private lateinit var layoutAdapter: LayoutAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var whereBusView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,18 +81,64 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         setAnimationInComponents()
         initialUI()
         initialVM()
-        initialTextViews()
-        startService()
+        initialRecycler()
         getIconList()
 
         super.onViewCreated(view, savedInstanceState)
     }
+    @SuppressLint("UseCompatLoadingForDrawables", "ResourceAsColor")
+    private fun initialRecycler() {
+        val list = ArrayList<LayoutModel>()
+        list.add(
+            LayoutModel(
+                getString(R.string.where),
+                getString(R.string.whereSub),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.bus_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_yellow_big_small,
+                R.drawable.ic_where_is_the_bus_icon_in_family
+            )
+        )
+
+        list.add(
+            LayoutModel(
+                getString(R.string.chat),
+                getString(R.string.chatSub),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.chat_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_purple_big_small,
+                R.drawable.ic_chat_icon_in_family
+            )
+        )
+        list.add(
+            LayoutModel(
+                getString(
+                    R.string.addNewStudent
+                ),
+                getString(R.string.addSafetyLcation),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.add_location_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_blue_big_small,
+                R.drawable.ic_location_icon_in_family
+            )
+        )
+        layoutAdapter = LayoutAdapter(this)
+        binding.layoutRecycler.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            setHasFixedSize(true)
+            adapter = layoutAdapter
+        }
+        layoutAdapter.submitList(list)
+    }
     private fun getIconList() {
         val imageList = ArrayList<ImageView>()
         val colorList = ArrayList<Int>()
-        imageList.add(binding.icBusImage)
-        imageList.add(binding.icChatImage)
-        imageList.add(binding.icLocationImage)
+        // imageList.add(binding.icBusImage)
+        // imageList.add(binding.icChatImage)
+        // imageList.add(binding.icLocationImage)
         imageList.add(binding.icAddChildrenImage)
         imageList.add(binding.icListStudentImage)
         colorList.add(R.color.busCardIconBorder)
@@ -114,9 +164,9 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         val animSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_out_components)
         val animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.newStudentCardView.startAnimation(animSlideOut)
-        binding.safetyLocationCardView.startAnimation(animationSlideIn)
-        binding.chatCardView.startAnimation(animSlideOut)
-        binding.whereBusCardView.startAnimation(animationSlideIn)
+        // binding.safetyLocationCardView.startAnimation(animationSlideIn)
+        //  binding.chatCardView.startAnimation(animSlideOut)
+        //  binding.whereBusCardView.startAnimation(animationSlideIn)
         binding.listOfStudentCardView.startAnimation(animationSlideIn)
         binding.topImagView.startAnimation(animationFadeIn)
         binding.topTw.startAnimation(animationFadeIn)
@@ -125,14 +175,14 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     private fun listOfStudentButtonClicked() {
         val animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_recycler)
-        binding.newStudentCardView.startAnimation(animationFadeOut)
-        binding.whereBusCardView.startAnimation(animationFadeOut)
-        binding.safetyLocationCardView.startAnimation(animationFadeOut)
+        //  binding.newStudentCardView.startAnimation(animationFadeOut)
+        //  binding.whereBusCardView.startAnimation(animationFadeOut)
+        // binding.safetyLocationCardView.startAnimation(animationFadeOut)
         Handler().postDelayed(
             {
                 binding.newStudentCardView.isVisible = false
-                binding.whereBusCardView.isVisible = false
-                binding.safetyLocationCardView.isVisible = false
+                //  binding.whereBusCardView.isVisible = false
+                //  binding.safetyLocationCardView.isVisible = false
                 binding.childrenCardView.startAnimation(animationSlideIn)
                 binding.childrenCardView.isVisible = true
             },
@@ -148,17 +198,18 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         Handler().postDelayed(
             {
                 binding.newStudentCardView.startAnimation(animationFadeOut)
-                binding.whereBusCardView.startAnimation(animationFadeOut)
-                binding.safetyLocationCardView.startAnimation(animationFadeOut)
+                // binding.whereBusCardView.startAnimation(animationFadeOut)
+                // binding.safetyLocationCardView.startAnimation(animationFadeOut)
                 binding.newStudentCardView.isVisible = true
-                binding.whereBusCardView.isVisible = true
-                binding.safetyLocationCardView.isVisible = true
+                //  binding.whereBusCardView.isVisible = true
+                // binding.safetyLocationCardView.isVisible = true
             },
             animationHideDelay
         )
     }
 
     private fun initialUI() {
+        whereBusView = layoutInflater.inflate(R.layout.where_is_the_bus_dialog, null)
         MyApp.appComponent.inject(this)
     }
 
@@ -166,38 +217,37 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         familyViewModel = ViewModelProvider(this, viewModelFactory).get(FamilyViewModel::class.java)
     }
 
-    private fun initialTextViews() {
-        val view = layoutInflater.inflate(R.layout.where_is_the_bus_dialog, null)
-        binding.whereBusCardView.setOnClickListener {
+    private fun checkClickedLayout(cardView: LayoutModel) {
+        if (cardView.title.equals(getString(R.string.where))) {
+
             val dialog = context?.let { it1 -> BottomSheetDialog(it1) }
-            val closeButton = view.findViewById<ImageView>(R.id.dismissButton)
+            val closeButton = whereBusView.findViewById<ImageView>(R.id.dismissButton)
             closeButton.setOnClickListener {
                 if (dialog != null) {
-                    (view.getParent() as ViewGroup).removeView(view) // <- fix
-                    dialog.dismiss()
+                    dialog.cancel()
+                    (whereBusView.getParent() as ViewGroup).removeView(whereBusView)
                 }
             }
             if (dialog != null) {
                 dialog.setCancelable(false)
             }
             if (dialog != null) {
-
-                dialog.setContentView(view)
+                dialog.setContentView(whereBusView)
             }
             if (dialog != null) {
                 dialog.show()
             }
             permissionCheck()
+        } else if (cardView.title.equals(getString(R.string.chat))) {
+            Navigation.findNavController(binding.root).navigate(R.id.action_mapFragment_to_chatServiceFragment)
+        } else if (cardView.subTitle.equals(getString(R.string.addSafetyLcation))) {
+            Navigation.findNavController(binding.root).navigate(R.id.action_mapFragment_to_mapsFragment)
         }
+
         binding.newStudentCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_addChildrenFragment)
         }
-        binding.safetyLocationCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_mapsFragment)
-        }
-        binding.chatCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_mapFragment_to_chatServiceFragment)
-        }
+
         binding.listOfStudentCardView.setOnClickListener {
             initialListOfStudent()
         }
@@ -309,5 +359,9 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         token: PermissionToken?
     ) {
         token!!.continuePermissionRequest()
+    }
+
+    override fun clickedLayout(cardView: LayoutModel) {
+        checkClickedLayout(cardView)
     }
 }

@@ -1,22 +1,14 @@
 package example.com.serviceapp.utils.adapters
 
-import android.content.res.Resources
-import android.graphics.PorterDuff
-import android.media.Image
-import android.provider.CalendarContract
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
-import example.com.serviceapp.ui.family.feature.addChild.AddChild
 import example.com.serviceapp.ui.family.feature.main.LayoutModel
 
 class LayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<LayoutModel, LayoutAdapter.ChildrenHolder>(
@@ -25,7 +17,7 @@ class LayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<Lay
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildrenHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item,
+            R.layout.layout_list_item,
             parent,
             false
         )
@@ -36,7 +28,7 @@ class LayoutAdapter(private val listener: LayoutClickListener) : ListAdapter<Lay
         with(getItem(position)) {
             holder.bottomIcon.setBackgroundResource(this.bottomIcon)
             holder.leftBackground.setBackgroundResource(this.leftXml)
-            holder.title.text =this.title
+            holder.title.text = this.title
             holder.subTitle.text = this.subTitle
             holder.exteriorIcon.setBackgroundResource(this.exteriorIcon)
             holder.interiorIcon.setBackgroundResource(this.interiorIcon)
