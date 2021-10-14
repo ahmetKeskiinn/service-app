@@ -92,12 +92,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap) {
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                Log.d("TAG", "onMapReady: " + location?.latitude)
-                Log.d("TAG", "onMapReady: " + location?.longitude)
                 val coordinat = location?.latitude?.let { LatLng(it, location.longitude) }
                 p0.addMarker(MarkerOptions().position(coordinat).title(getString(R.string.yourHere)))
                 p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))

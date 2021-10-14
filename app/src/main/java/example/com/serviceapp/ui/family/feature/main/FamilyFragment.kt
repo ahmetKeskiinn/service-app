@@ -80,6 +80,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         initialTextViews()
         startService()
         getIconList()
+
         super.onViewCreated(view, savedInstanceState)
     }
     private fun getIconList() {

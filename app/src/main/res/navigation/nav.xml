@@ -109,6 +109,9 @@
             app:destination="@id/mainServiceFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_loginFragment_to_deneme"
+            app:destination="@id/deneme" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -119,4 +122,9 @@
             android:id="@+id/action_mapsFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/deneme"
+        android:name="example.com.serviceapp.deneme"
+        android:label="fragment_deneme"
+        tools:layout="@layout/fragment_deneme" />
 </navigation>

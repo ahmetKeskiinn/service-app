@@ -38,6 +38,7 @@ class LoginFragment : Fragment() {
         initialUI()
         initialVM()
         detectMail()
+        Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_deneme)
         super.onViewCreated(view, savedInstanceState)
     }
 
