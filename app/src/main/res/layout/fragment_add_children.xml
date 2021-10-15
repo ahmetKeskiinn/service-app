@@ -5,88 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/admin_recyclerview_gradient"
+
     tools:context=".ui.family.feature.addChild.AddChildrenFragment">
 
-    <ImageView
-        android:id="@+id/childPhoto"
-        android:layout_marginTop="56dp"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="56dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/addchildren" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/childrenName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/login_edittext_corner"
-        android:paddingStart="44dp"
-        android:ems="10"
-        android:layout_marginTop="10dp"
-        android:inputType="textPersonName"
-        android:hint="@string/childrenName"
-        app:layout_constraintEnd_toEndOf="@+id/childPhoto"
-        app:layout_constraintStart_toStartOf="@+id/childPhoto"
-        app:layout_constraintTop_toBottomOf="@+id/childPhoto" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/childPhoto"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/addchildren"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.537"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/childrenNumber"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_edittext_corner"
-        android:paddingStart="44dp"
-        android:ems="10"
-        android:hint="@string/schoolNumber"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/childrenName"
-        app:layout_constraintStart_toStartOf="@+id/childrenName"
-        app:layout_constraintTop_toBottomOf="@+id/childrenName" />
-    <CheckBox
-        android:id="@+id/serviceCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/service"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/childrenNumber"
-        app:layout_constraintStart_toStartOf="@+id/childrenNumber"
-        app:layout_constraintTop_toBottomOf="@+id/childrenNumber" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/childrenNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/add"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/serviceCheckBox"
-        app:layout_constraintStart_toStartOf="@+id/serviceCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/serviceCheckBox" />
+                android:textColorHint="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/childrenName"
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_student"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/childrenName"
-        app:layout_constraintStart_toStartOf="@+id/childrenName"
-        app:layout_constraintTop_toTopOf="@+id/childrenName" />
+                app:startIconDrawable="@drawable/ic_school_number">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_school_number"
-        app:layout_constraintBottom_toBottomOf="@+id/childrenNumber"
-        app:layout_constraintStart_toStartOf="@+id/childrenNumber"
-        app:layout_constraintTop_toTopOf="@+id/childrenNumber"
-        android:layout_marginStart="10dp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/childrenNumberEditText"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/send_text_corner"
+                    android:hint="@string/schoolNumber"
+
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                android:background="@color/buttonColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/serviceCheckBox"
+                app:layout_constraintStart_toStartOf="@+id/childrenName"
+ />
+
+            <CheckBox
+                android:id="@+id/serviceCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/service"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/addButton"
+                app:layout_constraintEnd_toEndOf="@+id/childrenNumber"
+                app:layout_constraintStart_toStartOf="@+id/childrenNumber"
+                app:layout_constraintTop_toBottomOf="@+id/childrenNumber" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/childrenName"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/childPhoto"
+                app:startIconDrawable="@drawable/ic_add_student"
+                tools:layout_editor_absoluteX="221dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/childrenNameEdittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/send_text_corner"
+                    android:hint="@string/nameSurname"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_children_click"
+                app:layout_constraintEnd_toEndOf="@+id/childPhoto"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

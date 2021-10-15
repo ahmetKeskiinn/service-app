@@ -60,8 +60,8 @@ class AddChildrenFragment : Fragment() {
             hideAnimationInComponents()
             addChildrenFragment.addChild(
                 AddChild(
-                    binding.childrenName.text.toString(),
-                    binding.childrenNumber.text.toString(),
+                    binding.childrenNameEdittext.text.toString(),
+                    binding.childrenNumberEditText.text.toString(),
                     binding.serviceCheckBox.isChecked,
                     null
                 )
