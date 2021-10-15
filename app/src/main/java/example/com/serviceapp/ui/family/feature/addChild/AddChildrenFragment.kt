@@ -1,11 +1,15 @@
 package example.com.serviceapp.ui.family.feature.addChild
 
+import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,9 +23,11 @@ import javax.inject.Inject
 class AddChildrenFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var addChildrenFragment: AddChildrenViewModel
+    private lateinit var addChildrenFragmentViewModel: AddChildrenViewModel
     private lateinit var binding: FragmentAddChildrenBinding
-
+    private val IMAGE_REQUEST: Int =1
+    private lateinit var progressDialog: ProgressDialog
+    private var uri:String = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,11 +45,12 @@ class AddChildrenFragment : Fragment() {
     }
 
     private fun initialUI() {
+        progressDialog = ProgressDialog(context)
         MyApp.appComponent.inject(this)
     }
 
     private fun initialVM() {
-        addChildrenFragment = ViewModelProvider(this, viewModelFactory).get(AddChildrenViewModel::class.java)
+        addChildrenFragmentViewModel = ViewModelProvider(this, viewModelFactory).get(AddChildrenViewModel::class.java)
     }
 
     private fun hideAnimationInComponents() {
@@ -55,28 +62,84 @@ class AddChildrenFragment : Fragment() {
         binding.serviceCheckBox.startAnimation(animationFadeIn)
     }
 
+    private fun openImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            intent,
+           IMAGE_REQUEST
+        )
+        Log.d("TAG", "openImage: " + intent.getData())
+        progressDialog.setMessage("Yükleme")
+        progressDialog.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(data?.data != null){
+            uri = data.data.toString()
+            binding.childPhoto.setImageURI(data.data)
+        }
+        progressDialog.dismiss()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun initalButton() {
         binding.addButton.setOnClickListener {
-            hideAnimationInComponents()
-            addChildrenFragment.addChild(
-                AddChild(
-                    binding.childrenNameEdittext.text.toString(),
-                    binding.childrenNumberEditText.text.toString(),
-                    binding.serviceCheckBox.isChecked,
-                    null
-                )
-            ).observe(
-                viewLifecycleOwner,
-                Observer
-                {
-                    if (it) {
-                        Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT).show()
-                        Navigation.findNavController(binding.root).navigate(R.id.action_addChildrenFragment_to_mapFragment)
-                    } else {
-                        Toast.makeText(context, getString(R.string.somethingWentsWrong), Toast.LENGTH_SHORT).show()
-                    }
+            val childrenName = binding.childrenNameEdittext.text.toString()
+            val childrenNumber = binding.childrenNumberEditText.text.toString()
+            if (!childrenName.isEmpty() && !childrenName.isBlank() && !childrenName.isEmpty() && !childrenNumber.isBlank()) {
+                hideAnimationInComponents()
+                if(uri.equals("")){
+                    uri = "default"
                 }
-            )
+                addChildrenFragmentViewModel.setChildrenImage(uri.toUri(),childrenName,childrenNumber).observe(viewLifecycleOwner, Observer {
+                    if(!it.equals("default")){
+                        Toast.makeText(context,R.string.uploadImageSuccess, Toast.LENGTH_SHORT).show()
+                        addChildren(it)
+                    } else{
+                        Toast.makeText(context,R.string.uploadImageFail, Toast.LENGTH_SHORT).show()
+                        addChildren(it)
+                    }
+                })
+            } else {
+                Toast.makeText(context, R.string.wrongStudentInfo, Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.clickForReplaceImage.setOnClickListener {
+            openImage()
+        }
+        binding.childPhoto.setOnClickListener {
+            openImage()
         }
     }
+    private fun addChildren(url:String){
+        addChildrenFragmentViewModel.addChild(
+            AddChild(
+                binding.childrenNameEdittext.text.toString(),
+                binding.childrenNumberEditText.text.toString(),
+                binding.serviceCheckBox.isChecked,
+                null,
+                url
+            )
+        ).observe(
+            viewLifecycleOwner,
+            Observer
+            {
+                if (it) {
+                    Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT)
+                        .show()
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_addChildrenFragment_to_mapFragment)
+                } else {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.somethingWentsWrong),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        )
+    }
+
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
+import example.com.serviceapp.utils.updateWithUrl
 
 class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<AddChild, AdminRecyclerAdapter.ChildrenHolder>(
     diffCallback
@@ -26,9 +27,11 @@ class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<Ad
 
     override fun onBindViewHolder(holder: ChildrenHolder, position: Int) {
         with(getItem(position)) {
+            holder.childrenParent.text = this.parentName
             holder.childrenName.text = this.nameSurname
             holder.childrenNumber.text = this.schoolNumber
-            holder.childrenParent.text = this.parentName
+
+            holder.childrenPhoto.updateWithUrl(this.imageURL,holder.childrenPhoto)
         }
     }
     inner class ChildrenHolder(iv: View) : RecyclerView.ViewHolder(iv), View.OnClickListener {
@@ -37,6 +40,7 @@ class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<Ad
         val childrenParent: TextView = itemView.findViewById(R.id.childrenParent)
         val acceptButton: ImageView = itemView.findViewById(R.id.acceptButton)
         val rejectButton: ImageView = itemView.findViewById(R.id.rejectButton)
+        val childrenPhoto: ImageView = itemView.findViewById(R.id.childPhoto)
         init {
             itemView.findViewById<ImageView>(R.id.acceptButton).setOnClickListener(this)
             itemView.findViewById<ImageView>(R.id.rejectButton).setOnClickListener(this)

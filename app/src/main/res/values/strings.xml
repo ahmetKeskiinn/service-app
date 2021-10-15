@@ -42,5 +42,8 @@
     <string name="yourHere">You Are Here!</string>
     <string name="longtitude">Longtitude: </string>
     <string name="close">Kapat</string>
+    <string name="wrongStudentInfo">Student name or surname do not be empty/blank!</string>
+    <string name="uploadImageSuccess">Image Upload Successful!</string>
+    <string name="uploadImageFail">Image Upload Fail!</string>
 
 </resources>
