@@ -4,7 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.*
+import example.com.serviceapp.utils.addChildrenRequest
+import example.com.serviceapp.utils.children
+import example.com.serviceapp.utils.imageURL
+import example.com.serviceapp.utils.nameSurname
+import example.com.serviceapp.utils.parentName
+import example.com.serviceapp.utils.schoolNumber
+import example.com.serviceapp.utils.service
 import javax.inject.Inject
 
 class MainAdminViewModel @Inject constructor(val db: FirebaseDatabase) : ViewModel() {

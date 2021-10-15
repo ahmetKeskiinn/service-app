@@ -3,7 +3,6 @@ package example.com.serviceapp.ui.family.feature.addChild
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,8 @@ import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
 import example.com.serviceapp.utils.ViewModelFactory
+import example.com.serviceapp.utils.default
+import example.com.serviceapp.utils.intentType
 import javax.inject.Inject
 
 class AddChildrenFragment : Fragment() {
@@ -25,9 +26,9 @@ class AddChildrenFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var addChildrenFragmentViewModel: AddChildrenViewModel
     private lateinit var binding: FragmentAddChildrenBinding
-    private val IMAGE_REQUEST: Int =1
+    private val IMAGE_REQUEST: Int = 1
     private lateinit var progressDialog: ProgressDialog
-    private var uri:String = ""
+    private var uri: String = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,19 +65,18 @@ class AddChildrenFragment : Fragment() {
 
     private fun openImage() {
         val intent = Intent()
-        intent.type = "image/*"
+        intent.type = intentType
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(
             intent,
-           IMAGE_REQUEST
+            IMAGE_REQUEST
         )
-        Log.d("TAG", "openImage: " + intent.getData())
-        progressDialog.setMessage("Yükleme")
+        progressDialog.setMessage(getString(R.string.loading))
         progressDialog.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(data?.data != null){
+        if (data?.data != null) {
             uri = data.data.toString()
             binding.childPhoto.setImageURI(data.data)
         }
@@ -90,18 +90,35 @@ class AddChildrenFragment : Fragment() {
             val childrenNumber = binding.childrenNumberEditText.text.toString()
             if (!childrenName.isEmpty() && !childrenName.isBlank() && !childrenName.isEmpty() && !childrenNumber.isBlank()) {
                 hideAnimationInComponents()
-                if(uri.equals("")){
-                    uri = "default"
+                if (uri.equals("")) {
+                    uri = default
                 }
-                addChildrenFragmentViewModel.setChildrenImage(uri.toUri(),childrenName,childrenNumber).observe(viewLifecycleOwner, Observer {
-                    if(!it.equals("default")){
-                        Toast.makeText(context,R.string.uploadImageSuccess, Toast.LENGTH_SHORT).show()
-                        addChildren(it)
-                    } else{
-                        Toast.makeText(context,R.string.uploadImageFail, Toast.LENGTH_SHORT).show()
-                        addChildren(it)
-                    }
-                })
+                addChildrenFragmentViewModel
+                    .setChildrenImage(
+                        uri.toUri(),
+                        childrenName,
+                        childrenNumber
+                    )
+                    .observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            if (!it.equals(default)) {
+                                Toast.makeText(
+                                    context,
+                                    R.string.uploadImageSuccess,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                addChildren(it)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    R.string.uploadImageFail,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                addChildren(it)
+                            }
+                        }
+                    )
             } else {
                 Toast.makeText(context, R.string.wrongStudentInfo, Toast.LENGTH_SHORT).show()
             }
@@ -113,7 +130,7 @@ class AddChildrenFragment : Fragment() {
             openImage()
         }
     }
-    private fun addChildren(url:String){
+    private fun addChildren(url: String) {
         addChildrenFragmentViewModel.addChild(
             AddChild(
                 binding.childrenNameEdittext.text.toString(),
@@ -141,5 +158,4 @@ class AddChildrenFragment : Fragment() {
             }
         )
     }
-
 }

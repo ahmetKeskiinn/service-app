@@ -6,7 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
-import example.com.serviceapp.utils.*
+import example.com.serviceapp.utils.children
+import example.com.serviceapp.utils.idShared
+import example.com.serviceapp.utils.imageURL
+import example.com.serviceapp.utils.nameSurname
+import example.com.serviceapp.utils.parentName
+import example.com.serviceapp.utils.schoolNumber
+import example.com.serviceapp.utils.service
 import example.com.serviceapp.utils.services.ForegroundService
 import javax.inject.Inject
 

@@ -30,8 +30,10 @@ class AdminRecyclerAdapter(private val listener: ClickListener) : ListAdapter<Ad
             holder.childrenParent.text = this.parentName
             holder.childrenName.text = this.nameSurname
             holder.childrenNumber.text = this.schoolNumber
-
-            holder.childrenPhoto.updateWithUrl(this.imageURL,holder.childrenPhoto)
+            holder.childrenPhoto.updateWithUrl(
+                this.imageURL,
+                holder.childrenPhoto
+            )
         }
     }
     inner class ChildrenHolder(iv: View) : RecyclerView.ViewHolder(iv), View.OnClickListener {
