@@ -173,7 +173,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
         binding.topTw.startAnimation(animationFadeIn)
     }
     private fun initialUI() {
-        whereBusView = layoutInflater.inflate(R.layout.where_is_the_bus_dialog, null)
+        whereBusView = layoutInflater.inflate(R.layout.dialog_where_is_the_bus, null)
         MyApp.appComponent.inject(this)
     }
 
@@ -222,7 +222,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     }
 
     private fun initialListOfStudent() {
-        val view = layoutInflater.inflate(R.layout.list_of_student_dialog, null)
+        val view = layoutInflater.inflate(R.layout.dialog_list_of_student, null)
         val dialog = context?.let { it1 -> BottomSheetDialog(it1) }
         val closeButton = view.findViewById<ImageView>(R.id.dissmissList)
         val recycler = view.findViewById<RecyclerView>(R.id.childrenRecyclerDialog)

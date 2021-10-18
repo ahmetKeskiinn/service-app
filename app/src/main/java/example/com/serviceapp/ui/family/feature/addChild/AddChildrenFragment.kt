@@ -3,11 +3,13 @@ package example.com.serviceapp.ui.family.feature.addChild
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +18,7 @@ import androidx.navigation.Navigation
 import example.com.serviceapp.R
 import example.com.serviceapp.databinding.FragmentAddChildrenBinding
 import example.com.serviceapp.di.MyApp
+import example.com.serviceapp.utils.IOnBackPressed
 import example.com.serviceapp.utils.ViewModelFactory
 import example.com.serviceapp.utils.default
 import example.com.serviceapp.utils.intentType
@@ -42,13 +45,16 @@ class AddChildrenFragment : Fragment() {
         initialUI()
         initialVM()
         initalButton()
+        onBackPressed()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initialUI() {
         progressDialog = ProgressDialog(context)
         MyApp.appComponent.inject(this)
+
     }
+
 
     private fun initialVM() {
         addChildrenFragmentViewModel = ViewModelProvider(this, viewModelFactory).get(AddChildrenViewModel::class.java)
@@ -146,8 +152,7 @@ class AddChildrenFragment : Fragment() {
                 if (it) {
                     Toast.makeText(context, R.string.requestToast, Toast.LENGTH_SHORT)
                         .show()
-                    Navigation.findNavController(binding.root)
-                        .navigate(R.id.action_addChildrenFragment_to_mapFragment)
+                    goBack()
                 } else {
                     Toast.makeText(
                         context,
@@ -157,5 +162,25 @@ class AddChildrenFragment : Fragment() {
                 }
             }
         )
+    }
+    private fun onBackPressed(){
+        val callback: OnBackPressedCallback =
+                object : OnBackPressedCallback(true)
+                {
+                    override fun handleOnBackPressed() {
+                        Log.d("TAG", "handleOnBackPressed: ")
+                        goBack()
+                        // Leave empty do disable back press or
+                        // write your code which you want
+                    }
+                }
+        requireActivity().onBackPressedDispatcher.addCallback(
+                viewLifecycleOwner,
+                callback
+        )
+    }
+    private fun goBack(){
+        Navigation.findNavController(binding.root)
+                .navigate(R.id.action_addChildrenFragment_to_mapFragment)
     }
 }

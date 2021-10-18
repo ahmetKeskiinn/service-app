@@ -5,13 +5,16 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -53,6 +56,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         initialUI()
         initialVM()
         permissionCheck()
+        onBackPressed()
     }
     private fun initialUI() {
         MyApp.appComponent.inject(this)
@@ -113,5 +117,25 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         token: PermissionToken?
     ) {
         token!!.continuePermissionRequest()
+    }
+    private fun onBackPressed(){
+        val callback: OnBackPressedCallback =
+                object : OnBackPressedCallback(true)
+                {
+                    override fun handleOnBackPressed() {
+                        Log.d("TAG", "handleOnBackPressed: ")
+                        goBack()
+                        // Leave empty do disable back press or
+                        // write your code which you want
+                    }
+                }
+        requireActivity().onBackPressedDispatcher.addCallback(
+                viewLifecycleOwner,
+                callback
+        )
+    }
+    private fun goBack(){
+        Navigation.findNavController(binding.root)
+                .navigate(R.id.action_mapsFragment_to_mapFragment)
     }
 }
