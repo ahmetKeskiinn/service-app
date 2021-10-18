@@ -3,12 +3,14 @@ package example.com.serviceapp.utils.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import example.com.serviceapp.R
 import example.com.serviceapp.ui.family.feature.addChild.AddChild
+import example.com.serviceapp.utils.updateWithUrl
 
 class FamilyRecylerAdapter : ListAdapter<AddChild, FamilyRecylerAdapter.ChildrenHolder>(
     diffCallback
@@ -27,11 +29,13 @@ class FamilyRecylerAdapter : ListAdapter<AddChild, FamilyRecylerAdapter.Children
         with(getItem(position)) {
             holder.childrenName.text = this.nameSurname
             holder.childrenNumber.text = this.schoolNumber
+            holder.childrenPhoto.updateWithUrl(this.imageURL,holder.childrenPhoto)
         }
     }
     inner class ChildrenHolder(iv: View) : RecyclerView.ViewHolder(iv) {
-        val childrenName: TextView = itemView.findViewById(R.id.familyChildrenNameSurname)
-        val childrenNumber: TextView = itemView.findViewById(R.id.familyChildrenNumber)
+        val childrenName: TextView = itemView.findViewById(R.id.childrenNameSurname)
+        val childrenNumber: TextView = itemView.findViewById(R.id.childrenNumber)
+        val childrenPhoto: ImageView = itemView.findViewById(R.id.childPhoto)
     }
 }
 

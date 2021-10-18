@@ -25,6 +25,7 @@
     <string name="chat">CHAT</string>
     <string name="chatSub">With Driver</string>
     <string name="list">LIST OF</string>
+    <string name="listOfStudent">List Of Student</string>
     <string name="student">Student</string>
     <string name="where">WHERE</string>
     <string name="whereSub">Is The Bus?</string>

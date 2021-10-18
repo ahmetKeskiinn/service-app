@@ -21,26 +21,14 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             android:layout_marginTop="10dp"
-            android:text="@string/nameSurname"
+            android:text="@string/listOfStudent"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amasis"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/dissmissList"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/schoolNumber"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
