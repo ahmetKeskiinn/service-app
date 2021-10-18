@@ -12,6 +12,7 @@
     <string name="rememberMe">Remember Me</string>
     <string name="Login">Login</string>
     <string name="addChildren">Add Children</string>
+    <string name="addingChildrenTopic">ADD CHILDREN</string>
     <string name="addSafetyLcation">Safety Location</string>
     <string name="schoolNumber">School Number</string>
     <string name="childrenName">Children Name</string>

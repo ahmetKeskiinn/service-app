@@ -37,42 +37,46 @@ class AddChildrenViewModel @Inject constructor(
 
     fun setChildrenImage(filePath: Uri, studentName: String, studentNumber: String): MutableLiveData<String> {
         val isSuccess = MutableLiveData<String>()
-        val ref = storageReference.child(pathString + UUID.randomUUID().toString())
-        val uploadTask = ref.putFile(filePath)
-        val urlTask =
-            uploadTask.continueWithTask(
-                Continuation<
-                    UploadTask.TaskSnapshot,
-                    Task<Uri>> {
-                    task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let {
-                            throw it
+        if (!filePath.toString().equals(default)) {
+            val ref = storageReference.child(pathString + UUID.randomUUID().toString())
+            val uploadTask = ref.putFile(filePath)
+            val urlTask =
+                uploadTask.continueWithTask(
+                    Continuation<
+                        UploadTask.TaskSnapshot,
+                        Task<Uri>> {
+                        task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
                         }
+                        return@Continuation ref.downloadUrl
                     }
-                    return@Continuation ref.downloadUrl
-                }
-            ).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    val data = HashMap<String, Any>()
-                    val currentUser = fireBase.currentUser
-                    val informations = currentUser?.email + "," + studentName + "," + studentNumber
-                    data[informations] = downloadUri.toString()
-                    db.collection(collectionPath)
-                        .add(data)
-                        .addOnSuccessListener { documentReference ->
-                            isSuccess.value = task.result.toString()
-                        }
-                        .addOnFailureListener { e ->
-                            isSuccess.value = default
-                        }
-                } else {
+                ).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        val data = HashMap<String, Any>()
+                        val currentUser = fireBase.currentUser
+                        val informations = currentUser?.email + "," + studentName + "," + studentNumber
+                        data[informations] = downloadUri.toString()
+                        db.collection(collectionPath)
+                            .add(data)
+                            .addOnSuccessListener { documentReference ->
+                                isSuccess.value = task.result.toString()
+                            }
+                            .addOnFailureListener { e ->
+                                isSuccess.value = default
+                            }
+                    } else {
+                        isSuccess.value = default
+                    }
+                }.addOnFailureListener {
                     isSuccess.value = default
                 }
-            }.addOnFailureListener {
-                isSuccess.value = default
-            }
+        } else {
+            isSuccess.value = default
+        }
         return isSuccess
     }
 }

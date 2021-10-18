@@ -4,10 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/admin_recyclerview_gradient"
-
     tools:context=".ui.family.feature.addChild.AddChildrenFragment">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/family_background_gradient"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHeight_percent=".6"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/topImagView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/topTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addChildren"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:fontFamily="@font/amasis"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/topImagView"
+        app:layout_constraintEnd_toEndOf="@+id/topImagView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".4"
+        app:layout_constraintStart_toStartOf="parent" />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
