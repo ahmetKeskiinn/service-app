@@ -118,24 +118,23 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     ) {
         token!!.continuePermissionRequest()
     }
-    private fun onBackPressed(){
+    private fun onBackPressed() {
         val callback: OnBackPressedCallback =
-                object : OnBackPressedCallback(true)
-                {
-                    override fun handleOnBackPressed() {
-                        Log.d("TAG", "handleOnBackPressed: ")
-                        goBack()
-                        // Leave empty do disable back press or
-                        // write your code which you want
-                    }
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    Log.d("TAG", "handleOnBackPressed: ")
+                    goBack()
+                    // Leave empty do disable back press or
+                    // write your code which you want
                 }
+            }
         requireActivity().onBackPressedDispatcher.addCallback(
-                viewLifecycleOwner,
-                callback
+            viewLifecycleOwner,
+            callback
         )
     }
-    private fun goBack(){
+    private fun goBack() {
         Navigation.findNavController(binding.root)
-                .navigate(R.id.action_mapsFragment_to_mapFragment)
+            .navigate(R.id.action_mapsFragment_to_mapFragment)
     }
 }

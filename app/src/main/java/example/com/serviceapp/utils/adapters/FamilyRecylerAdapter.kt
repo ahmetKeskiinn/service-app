@@ -29,7 +29,10 @@ class FamilyRecylerAdapter : ListAdapter<AddChild, FamilyRecylerAdapter.Children
         with(getItem(position)) {
             holder.childrenName.text = this.nameSurname
             holder.childrenNumber.text = this.schoolNumber
-            holder.childrenPhoto.updateWithUrl(this.imageURL,holder.childrenPhoto)
+            holder.childrenPhoto.updateWithUrl(
+                this.imageURL,
+                holder.childrenPhoto
+            )
         }
     }
     inner class ChildrenHolder(iv: View) : RecyclerView.ViewHolder(iv) {

@@ -47,5 +47,6 @@
     <string name="uploadImageSuccess">Image Upload Successful!</string>
     <string name="uploadImageFail">Image Upload Fail!</string>
     <string name="loading">Loading...</string>
+    <string name="wherIsTheBusTopic">BUS LOCATION</string>
 
 </resources>
