@@ -30,5 +30,6 @@
     <color name="listStudentCardIconBorder">#2fa6f7</color>
     <color name="familyGardientBottom">#ea54a7</color>
     <color name="familyGardientTop">#ec3668</color>
+    <color name="recyclerBackground">#EBECF0</color>
 
 </resources>

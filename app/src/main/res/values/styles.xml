@@ -43,6 +43,8 @@
         <item name="android:typeface">normal</item>
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
-
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+    <style name="familyChildrenRecycler">
+        <item name="cornerRadius">50dp</item>
+    </style>
 </resources>

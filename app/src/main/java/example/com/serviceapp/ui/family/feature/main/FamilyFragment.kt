@@ -230,6 +230,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
 
     private fun initialListOfStudent() {
         val view = layoutInflater.inflate(R.layout.dialog_list_of_student, null)
+        view.background = context?.getDrawable(R.color.recyclerBackground)
         val dialog = context?.let {
             it1 ->
             BottomSheetDialog(

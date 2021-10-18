@@ -34,4 +34,5 @@ const val collectionPath = "posts"
 const val pathString = "uploads/"
 const val intentType = "image/*"
 const val targetWidth: Int = 200
-const val targetHeight: Int = 300
+const val imageBorderWidth: Float = 0.5f
+const val imageBorderRadius: Float = 50f
