@@ -19,6 +19,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -40,6 +41,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     private lateinit var binding: FragmentMapsBinding
     private lateinit var selectedSafetyViewModel: SelectedSafetyLocationViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var markerOptions: MarkerOptions? = null
     @Inject
     lateinit var viewmodelfactory: ViewModelFactory
     override fun onCreateView(
@@ -95,13 +97,38 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap) {
+        var locationCoordinat: LatLng? = null
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 val coordinat = location?.latitude?.let { LatLng(it, location.longitude) }
-                p0.addMarker(MarkerOptions().position(coordinat).title(getString(R.string.yourHere)))
+                locationCoordinat = coordinat
+                p0.addMarker(
+                    MarkerOptions().position(coordinat).title(getString(R.string.yourHere))
+                )
                 p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))
             }
+        p0.setOnMapClickListener(OnMapClickListener { point ->
+            if(markerOptions!=null){
+                p0.clear()
+                p0.addMarker(
+                    MarkerOptions().position(locationCoordinat).title(getString(R.string.yourHere))
+                )
+                markerOptions = MarkerOptions().position(LatLng(point.latitude, point.longitude))
+                    .title(binding.id.text.toString())
+                p0.addMarker(markerOptions)
+            }
+            else{
+                markerOptions = MarkerOptions().position(LatLng(point.latitude, point.longitude))
+                    .title(binding.id.text.toString())
+
+                p0.addMarker(markerOptions)
+            }
+
+            binding.latitudeTextview.text = point.latitude.toString()
+            binding.longtitudeTextView.text = point.longitude.toString()
+
+        })
     }
 
     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
