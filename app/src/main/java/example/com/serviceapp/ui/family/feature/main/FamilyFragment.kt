@@ -50,7 +50,6 @@ import example.com.serviceapp.utils.services.ForegroundService
 import example.com.serviceapp.utils.zoomCount
 import javax.inject.Inject
 
-
 class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, LayoutClickListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -67,9 +66,9 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     private lateinit var whereBusView: View
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFamilyBinding.inflate(inflater, container, false)
         return binding.root
@@ -87,40 +86,40 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     private fun initialRecycler() {
         val listLayoutItems = ArrayList<LayoutModel>()
         listLayoutItems.add(
-                LayoutModel(
-                        getString(R.string.where),
-                        getString(R.string.whereSub),
-                        R.drawable.ic_arrow_icon_family_small,
-                        R.drawable.bus_background_shape,
-                        R.drawable.ic_family_ui_icon_background,
-                        R.drawable.ic_family_ui_icon_background_yellow_big_small,
-                        R.drawable.ic_where_is_the_bus_icon_in_family
-                )
+            LayoutModel(
+                getString(R.string.where),
+                getString(R.string.whereSub),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.bus_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_yellow_big_small,
+                R.drawable.ic_where_is_the_bus_icon_in_family
+            )
         )
 
         listLayoutItems.add(
-                LayoutModel(
-                        getString(R.string.chat),
-                        getString(R.string.chatSub),
-                        R.drawable.ic_arrow_icon_family_small,
-                        R.drawable.chat_background_shape,
-                        R.drawable.ic_family_ui_icon_background,
-                        R.drawable.ic_family_ui_icon_background_purple_big_small,
-                        R.drawable.ic_chat_icon_in_family
-                )
+            LayoutModel(
+                getString(R.string.chat),
+                getString(R.string.chatSub),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.chat_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_purple_big_small,
+                R.drawable.ic_chat_icon_in_family
+            )
         )
         listLayoutItems.add(
-                LayoutModel(
-                        getString(
-                                R.string.addNewStudent
-                        ),
-                        getString(R.string.addSafetyLcation),
-                        R.drawable.ic_arrow_icon_family_small,
-                        R.drawable.add_location_background_shape,
-                        R.drawable.ic_family_ui_icon_background,
-                        R.drawable.ic_family_ui_icon_background_blue_big_small,
-                        R.drawable.ic_location_icon_in_family
-                )
+            LayoutModel(
+                getString(
+                    R.string.addNewStudent
+                ),
+                getString(R.string.addSafetyLcation),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.add_location_background_shape,
+                R.drawable.ic_family_ui_icon_background,
+                R.drawable.ic_family_ui_icon_background_blue_big_small,
+                R.drawable.ic_location_icon_in_family
+            )
         )
         layoutAdapter = LayoutAdapter(this)
         binding.layoutRecycler.apply {
@@ -133,27 +132,27 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     private fun initialGridRecycler() {
         val gridLayoutItems = ArrayList<LayoutModel>()
         gridLayoutItems.add(
-                LayoutModel(
-                        getString(R.string.addNewStudentSub),
-                        getString(R.string.addNewStudent),
-                        R.drawable.ic_arrow_icon_family_small,
-                        R.drawable.add_new_student_background_shape,
-                        R.drawable.ic_family_ui_icon_background_small_big,
-                        R.drawable.id_family_ui_icon_background_red_small_small,
-                        R.drawable.ic_addd_children_icon_in_family
-                )
+            LayoutModel(
+                getString(R.string.addNewStudentSub),
+                getString(R.string.addNewStudent),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.add_new_student_background_shape,
+                R.drawable.ic_family_ui_icon_background_small_big,
+                R.drawable.id_family_ui_icon_background_red_small_small,
+                R.drawable.ic_addd_children_icon_in_family
+            )
         )
 
         gridLayoutItems.add(
-                LayoutModel(
-                        getString(R.string.list),
-                        getString(R.string.student),
-                        R.drawable.ic_arrow_icon_family_small,
-                        R.drawable.list_of_student_background_shape,
-                        R.drawable.ic_family_ui_icon_background_small_big,
-                        R.drawable.id_family_ui_icon_background_blue_small_small,
-                        R.drawable.ic_list_of_student_icon_in_family
-                )
+            LayoutModel(
+                getString(R.string.list),
+                getString(R.string.student),
+                R.drawable.ic_arrow_icon_family_small,
+                R.drawable.list_of_student_background_shape,
+                R.drawable.ic_family_ui_icon_background_small_big,
+                R.drawable.id_family_ui_icon_background_blue_small_small,
+                R.drawable.ic_list_of_student_icon_in_family
+            )
         )
 
         gridLayoutManager = GridLayoutAdapter(this)
@@ -191,8 +190,8 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
 
             val dialog = context?.let { it1 ->
                 BottomSheetDialog(
-                        it1,
-                        R.style.BottomSheetDialogTheme
+                    it1,
+                    R.style.BottomSheetDialogTheme
                 )
             }
             val closeButton = whereBusView.findViewById<ImageView>(R.id.dismissButton)
@@ -234,8 +233,8 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
         view.background = context?.getDrawable(R.color.recyclerBackground)
         val dialog = context?.let { it1 ->
             BottomSheetDialog(
-                    it1,
-                    R.style.BottomSheetDialogTheme
+                it1,
+                R.style.BottomSheetDialogTheme
             )
         }
         val closeButton = view.findViewById<ImageView>(R.id.dissmissList)
@@ -265,11 +264,11 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     }
     private fun getData() {
         familyViewModel.getChildList().observe(
-                viewLifecycleOwner,
-                Observer
-                {
-                    recyclerAdapter.submitList(it)
-                }
+            viewLifecycleOwner,
+            Observer
+            {
+                recyclerAdapter.submitList(it)
+            }
         )
     }
 
@@ -298,8 +297,8 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     }
     private fun isPermissionGiven(): Boolean {
         return ActivityCompat.checkSelfPermission(
-                this.requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
+            this.requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -320,7 +319,7 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
                 Log.d("TAG", "onMapReady: " + location?.longitude)
                 val coordinat = location?.latitude?.let { LatLng(it, location.longitude) }
                 p0.addMarker(
-                        MarkerOptions().position(coordinat).title(getString(R.string.yourHere))
+                    MarkerOptions().position(coordinat).title(getString(R.string.yourHere))
                 )
                 p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))
             }
@@ -335,8 +334,8 @@ class FamilyFragment : Fragment(), OnMapReadyCallback, PermissionListener, Layou
     }
 
     override fun onPermissionRationaleShouldBeShown(
-            permission: PermissionRequest?,
-            token: PermissionToken?
+        permission: PermissionRequest?,
+        token: PermissionToken?
     ) {
         token!!.continuePermissionRequest()
     }

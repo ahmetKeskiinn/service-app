@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.karumi.dexter.Dexter
@@ -42,6 +44,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
     private lateinit var selectedSafetyViewModel: SelectedSafetyLocationViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerOptions: MarkerOptions? = null
+    private var locationList = ArrayList<SafetyLocationModel>()
     @Inject
     lateinit var viewmodelfactory: ViewModelFactory
     override fun onCreateView(
@@ -108,29 +111,89 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
                 )
                 p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))
             }
-        p0.setOnMapClickListener(OnMapClickListener { point ->
-            if(markerOptions!=null){
-                p0.clear()
-                p0.addMarker(
-                    MarkerOptions().position(locationCoordinat).title(getString(R.string.yourHere))
-                )
+        addFirebaseLocations(p0)
+        p0.setOnMapClickListener(
+            OnMapClickListener { point ->
+                if (markerOptions != null) {
+                    p0.clear()
+                    addFirebaseLocations(p0)
+                    p0.addMarker(
+                        MarkerOptions().position(locationCoordinat).title(getString(R.string.yourHere))
+                    )
+                }
                 markerOptions = MarkerOptions().position(LatLng(point.latitude, point.longitude))
-                    .title(binding.id.text.toString())
+                    .title(getString(R.string.newLocation))
+                    .icon(
+                        BitmapDescriptorFactory
+                            .defaultMarker(
+                                BitmapDescriptorFactory.HUE_ORANGE
+                            )
+                    )
                 p0.addMarker(markerOptions)
+
+                binding.latitudeTextview.text = point.latitude.toString()
+                binding.longtitudeTextView.text = point.longitude.toString()
+                binding.saveSelectedLocation.setOnClickListener {
+                    if (!binding.id.text.toString().isEmpty()) {
+                        selectedSafetyViewModel.saveSafetyLocation(
+                            SafetyLocationModel(
+                                binding.id.text.toString(),
+                                binding.latitudeTextview.text.toString(),
+                                binding.longtitudeTextView.text.toString()
+                            )
+                        )
+                            .observe(
+                                viewLifecycleOwner,
+                                Observer
+                                {
+                                    if (it) {
+                                        Toast.makeText(context, R.string.locationAddSuccess, Toast.LENGTH_SHORT).show()
+                                        Navigation.findNavController(binding.root).navigate(R.id.action_mapsFragment_to_mapFragment)
+                                    } else {
+                                        Toast.makeText(context, R.string.locationAddFail, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            )
+                    } else {
+                        Toast.makeText(context, R.string.giveLocationName, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-            else{
-                markerOptions = MarkerOptions().position(LatLng(point.latitude, point.longitude))
-                    .title(binding.id.text.toString())
 
-                p0.addMarker(markerOptions)
-            }
-
-            binding.latitudeTextview.text = point.latitude.toString()
-            binding.longtitudeTextView.text = point.longitude.toString()
-
-        })
+        )
     }
+    private fun addFirebaseLocations(p0: GoogleMap) {
 
+        if (locationList.size == 0) {
+            selectedSafetyViewModel.getSafetyLocations().observe(
+                viewLifecycleOwner,
+                Observer {
+                    locationList.addAll(it)
+                    drawIconForLocation(locationList, p0)
+                }
+            )
+        } else {
+            drawIconForLocation(locationList, p0)
+        }
+    }
+    private fun drawIconForLocation(list: List<SafetyLocationModel>, p0: GoogleMap) {
+        for (i in 0..list.size - 1) {
+            val defaultMarker = MarkerOptions().position(
+                LatLng(
+                    list.get(i).latitude.toDouble(),
+                    list.get(i).longtitude.toDouble()
+                )
+            )
+                .title(list.get(i).name)
+                .title(getString(R.string.newLocation))
+                .icon(
+                    BitmapDescriptorFactory.defaultMarker(
+                        BitmapDescriptorFactory.HUE_GREEN
+                    )
+                )
+            p0.addMarker(defaultMarker)
+        }
+    }
     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
         startMap()
     }

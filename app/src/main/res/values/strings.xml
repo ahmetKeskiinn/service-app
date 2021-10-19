@@ -49,5 +49,8 @@
     <string name="uploadImageFail">Image Upload Fail!</string>
     <string name="loading">Loading...</string>
     <string name="wherIsTheBusTopic">BUS LOCATION</string>
-
+    <string name="giveLocationName">Please give name for selected location!</string>
+    <string name="newLocation">New Location Point!</string>
+    <string name="locationAddSuccess">Location Adding Success</string>
+    <string name="locationAddFail">Location Adding Failed!</string>
 </resources>
