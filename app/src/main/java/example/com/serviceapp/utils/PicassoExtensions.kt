@@ -18,6 +18,7 @@ fun ImageView.updateWithUrl(url: String, imageViewAvatar: ImageView) {
             .build()
 
 
+
         Picasso.get()
             .load(url)
             .fit()
