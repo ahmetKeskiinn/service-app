@@ -1,6 +1,7 @@
 package example.com.serviceapp.utils
 
 import android.graphics.Color
+import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.makeramen.roundedimageview.RoundedTransformationBuilder
@@ -16,8 +17,7 @@ fun ImageView.updateWithUrl(url: String, imageViewAvatar: ImageView) {
             .cornerRadiusDp(imageBorderRadius)
             .oval(false)
             .build()
-
-
+        Log.d("TAG", "updateWithUrl: ")
 
         Picasso.get()
             .load(url)
