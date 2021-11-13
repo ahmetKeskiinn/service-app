@@ -98,18 +98,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback, PermissionListener {
         )
     }
 
-    @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap) {
         var locationCoordinat: LatLng? = null
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                val coordinat = location?.latitude?.let { LatLng(it, location.longitude) }
-                locationCoordinat = coordinat
-                p0.addMarker(
-                    MarkerOptions().position(coordinat).title(getString(R.string.yourHere))
-                )
-                p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))
+                Log.d("TAG", "onMapReady: " + location?.latitude)
+                if(location !=null){
+                    val coordinat = location?.latitude?.let { LatLng(it, location.longitude) }
+                    locationCoordinat = coordinat
+                    p0.addMarker(
+                        MarkerOptions().position(coordinat).title(getString(R.string.yourHere))
+                    )
+                    p0.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinat, zoomCount))
+                }
+
             }
         addFirebaseLocations(p0)
         p0.setOnMapClickListener(
